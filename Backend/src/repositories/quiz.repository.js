@@ -21,4 +21,63 @@ async function createQuizWithQuestions(data) {
   });
 }
 
+async function findQuizById(id) {
+  return prisma.quiz.findUnique({
+    where: { id },
+
+    include: {
+      questions: true,
+      answers: true,
+    },
+  });
+}
+
+async function createAnswers(data) {
+  return prisma.answer.createMany({
+    data,
+  });
+}
+
+async function updateQuizScore(id, score) {
+  return prisma.quiz.update({
+    where: { id },
+
+    data: {
+      score,
+      status: "DONE",
+      completedAt: new Date(),
+    },
+
+    include: {
+      questions: true,
+      answers: true,
+    },
+  });
+}
+
+async function getUserQuizzes(userId) {
+  return prisma.quiz.findMany({
+    where: {
+      userId,
+    },
+
+    include: {
+      course: true,
+      questions: true,
+      answers: true,
+    },
+
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+export {
+  findQuizById,
+  createAnswers,
+  updateQuizScore,
+  getUserQuizzes,
+};
+
 export { createQuizWithQuestions };
