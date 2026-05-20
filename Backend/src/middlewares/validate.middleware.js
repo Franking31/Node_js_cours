@@ -9,7 +9,7 @@ function validate(schema) {
 
       next();
     } catch (err) {
-      return res.status(400).json(err.errors);
+      return res.status(400).json(err.message);
     }
   };
 }
