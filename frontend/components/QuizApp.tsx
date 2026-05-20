@@ -2,20 +2,38 @@
 import { useState } from "react";
 import { Question, QuizConfig, AnswerRecord } from "@/lib/types";
 import { generateQuiz } from "@/lib/generateQuiz";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./ResgisterPage"
 import UploadPhase from "./UploadPhase";
 import LoadingPhase from "./LoadingPhase";
 import QuizPhase from "./QuizPhase";
 import ResultsPhase from "./ResultsPhase";
 import styles from "../modules/QuizApp.module.css";
 
-type Phase = "upload" | "loading" | "quiz" | "results";
+type Phase = "login" | "register" | "upload" | "loading" | "quiz" | "results";
+
+const AUTH_PHASES: Phase[] = ["login", "register"];
 
 export default function QuizApp() {
-  const [phase, setPhase] = useState<Phase>("upload");
+  const [phase, setPhase] = useState<Phase>("login");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<AnswerRecord[]>([]);
   const [retryList, setRetryList] = useState<Question[]>([]);
 
+  /* ── Auth ── */
+  async function handleLogin(email: string, password: string) {
+    // TODO : appel API login
+    // Ex : await api.post("/auth/login", { email, password })
+    setPhase("upload");
+  }
+
+  async function handleRegister(name: string, email: string, password: string) {
+    // TODO : appel API register
+    // Ex : await api.post("/auth/register", { name, email, password })
+    setPhase("upload");
+  }
+
+  /* ── Quiz ── */
   async function handleGenerate(config: QuizConfig) {
     setPhase("loading");
     try {
@@ -53,8 +71,30 @@ export default function QuizApp() {
     setPhase("upload");
   }
 
-  const stepIndex = { upload: 0, loading: 1, quiz: 2, results: 2 }[phase];
+  /* ── Steps bar (masquée sur les pages auth) ── */
+  const stepIndex = ({ upload: 0, loading: 1, quiz: 2, results: 2 } as Record<string, number>)[phase] ?? -1;
+  const isAuthPhase = AUTH_PHASES.includes(phase);
 
+  /* ── Pages auth : rendu sans le shell QuizAI ── */
+  if (phase === "login") {
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        onGoRegister={() => setPhase("register")}
+      />
+    );
+  }
+
+  if (phase === "register") {
+    return (
+      <RegisterPage
+        onRegister={handleRegister}
+        onGoLogin={() => setPhase("login")}
+      />
+    );
+  }
+
+  /* ── Shell principal (upload → résultats) ── */
   return (
     <div className={styles.app}>
       <header className={styles.header}>
@@ -71,7 +111,9 @@ export default function QuizApp() {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className={`${styles.step} ${i < stepIndex ? styles.done : i === stepIndex ? styles.active : ""}`}
+            className={`${styles.step} ${
+              i < stepIndex ? styles.done : i === stepIndex ? styles.active : ""
+            }`}
           />
         ))}
       </div>
