@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Question, QuizConfig, AnswerRecord } from "@/lib/types";
-import { generateQuiz } from "@/lib/generateQuiz";
+//import { generateQuiz } from "@/lib/generateQuiz";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./ResgisterPage"
 import UploadPhase from "./UploadPhase";
@@ -14,6 +14,7 @@ type Phase = "login" | "register" | "upload" | "loading" | "quiz" | "results";
 
 const AUTH_PHASES: Phase[] = ["login", "register"];
 
+
 export default function QuizApp() {
   const [phase, setPhase] = useState<Phase>("login");
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -22,31 +23,79 @@ export default function QuizApp() {
 
   /* ── Auth ── */
   async function handleLogin(email: string, password: string) {
-    // TODO : appel API login
-    // Ex : await api.post("/auth/login", { email, password })
-    setPhase("upload");
-  }
+  try {
+    const res = await fetch("http://localhost:3000/api/auth/login", {   // ← Change l'URL si besoin
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",        // Important pour les cookies
+      body: JSON.stringify({ email, password }),
+    });
 
-  async function handleRegister(name: string, email: string, password: string) {
-    // TODO : appel API register
-    // Ex : await api.post("/auth/register", { name, email, password })
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message || "Erreur de connexion");
+
     setPhase("upload");
+  } catch (e: any) {
+    console.error(e);
+    throw e; // Pour que le composant LoginPage affiche l'erreur
   }
+}
+
+async function handleRegister(name: string, email: string, password: string) {
+  try {
+    const res = await fetch("http://localhost:3000/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.message || "Erreur d'inscription");
+
+    setPhase("upload");
+  } catch (e: any) {
+    console.error(e);
+    throw e;
+  }
+}
 
   /* ── Quiz ── */
   async function handleGenerate(config: QuizConfig) {
-    setPhase("loading");
-    try {
-      const qs = await generateQuiz(config);
-      setQuestions(qs);
-      setAnswers([]);
-      setPhase("quiz");
-    } catch (e) {
-      console.error(e);
-      alert("Erreur de génération. Vérifie que ton cours contient suffisamment de contenu.");
-      setPhase("upload");
-    }
+  setPhase("loading");
+  try {
+    const res = await fetch("http://localhost:3000/api/quiz/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        course: {
+          title: config.title,
+          content: config.content,
+          subject: config.subject,
+          level: config.level,
+        },
+        quizConfig: {
+          questionCount: config.questionCount,
+          selectedTypes: config.selectedTypes,
+        },
+      }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Erreur de génération");
+
+    setQuestions(data.questions);
+    setAnswers([]);
+    setPhase("quiz");
+  } catch (e) {
+    console.error(e);
+    alert("Erreur de génération. Vérifie que ton cours contient suffisamment de contenu.");
+    setPhase("upload");
   }
+}
 
   function handleQuizFinish(records: AnswerRecord[]) {
     setAnswers(records);

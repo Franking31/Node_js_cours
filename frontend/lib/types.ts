@@ -9,6 +9,8 @@ export interface Question {
 }
 
 export interface QuizConfig {
+  title: string;       // ← ajouter
+  content: string;
   courseText: string;
   subject: string;
   level: string;
