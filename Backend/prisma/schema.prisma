@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum QuizStatus {
+  PENDING
+  ACTIVE
+  DONE
+}
+
+enum QuestionType {
+  qcm
+  vf
+  ouvert
+}
+
+model User {
+  id        String @id @default(cuid())
+  email     String @unique
+  password  String
+  name      String
+  role      Role @default(STUDENT)
+
+  courses   Course[]
+  quizzes   Quiz[]
+  answers   Answer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id        String @id @default(cuid())
+  title     String
+  content   String @db.Text
+  subject   String
+  level     String
+
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  quizzes   Quiz[]
+
+  createdAt DateTime @default(now())
+}
+
+model Quiz {
+  id            String @id @default(cuid())
+  courseId      String
+  userId        String
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  questionCount Int
+  types         String[]
+  status        QuizStatus
+  score         Float?
+
+  questions    Question[]
+  answers      Answer[]
+
+  createdAt     DateTime @default(now())
+  completedAt   DateTime?
+}
+
+model Question {
+  id         String @id @default(cuid())
+  quizId     String
+
+  quiz       Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  type       QuestionType
+  question   String @db.Text
+
+  answers    Answer[]
+
+  options    String[]   
+  answer     String
+  explanation String @db.Text
+  order      Int
+}
+
+model Answer {
+  id         String @id @default(cuid())
+  quizId     String
+  questionId String
+  userId     String
+
+  quiz      Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  question  Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userAnswer String
+  isCorrect  Boolean
+  answeredAt DateTime @default(now())
+}
