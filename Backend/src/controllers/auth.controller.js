@@ -9,7 +9,7 @@ const cookieOptions = {
 async function register(req, res) {
   try {
     const { user, accessToken, refreshToken } =
-      await service.register(req.body);
+      await _register(req.body);
 
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
@@ -23,7 +23,7 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const { user, accessToken, refreshToken } =
-      await service.login(req.body);
+      await _login(req.body);
 
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
@@ -38,7 +38,7 @@ async function refresh(req, res) {
   try {
     const token = req.cookies.refreshToken;
 
-    const { accessToken } = await service.refresh(token);
+    const { accessToken } = await _refresh(token);
 
     res.cookie("accessToken", accessToken, cookieOptions);
 
