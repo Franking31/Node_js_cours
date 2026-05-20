@@ -1,26 +1,28 @@
 import { z } from "zod";
 
 const quizSchema = z.object({
-  course: z.object({
-    title: z.string().min(3),
+  body: z.object({
+    course: z.object({
+      title: z.string().min(3),
 
-    content: z.string().min(100),
+      content: z.string().min(100),
 
-    subject: z.string().min(2).max(200),
+      subject: z.string().min(2).max(200),
 
-    level: z.string().min(1),
-  }),
+      level: z.string().min(1),
+    }),
 
-  quizConfig: z.object({
-    questionCount: z.number().min(5).max(30).default(15),
+    quizConfig: z.object({
+      questionCount: z.number().min(5).max(30).default(15),
 
-    selectedTypes: z
-      .array(
-        z.enum(["qcm", "vf", "ouvert"])
-      )
-      .min(1)
-      .default(["qcm"]),
-  }),
+      selectedTypes: z
+        .array(
+          z.enum(["qcm", "vf", "ouvert"])
+        )
+        .min(1)
+        .default(["qcm"]),
+    }),
+  })
 });
 
 
