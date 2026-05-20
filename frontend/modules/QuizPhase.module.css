@@ -1,0 +1,32 @@
+.container { animation: fadeIn 0.3s ease; }
+.phase { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--txt2); margin-bottom: 2px; }
+.quizHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.counter { font-family: var(--mono); font-size: 12px; color: var(--txt2); }
+.scoreBadge { font-family: var(--mono); font-size: 12px; padding: 4px 12px; border-radius: 50px; background: var(--accent-light); color: var(--accent); }
+.progressBar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 1.5rem; }
+.progressFill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+.card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+.typeTag { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; margin-bottom: 1rem; }
+.tagQcm { background: var(--accent-light); color: var(--accent); }
+.tagVf { background: var(--success-light); color: var(--success); }
+.tagOuvert { background: var(--warn-light); color: var(--warn); }
+.qText { font-size: 15px; font-weight: 500; line-height: 1.6; margin-bottom: 1.25rem; }
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option { display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; border: 0.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 14px; transition: all 0.15s; }
+.option:hover { border-color: var(--accent); background: var(--accent-light); }
+.selected { border-color: var(--accent) !important; background: var(--accent-light) !important; }
+.correct { border-color: var(--success) !important; background: var(--success-light) !important; color: var(--success); }
+.wrong { border-color: var(--danger) !important; background: var(--danger-light) !important; color: var(--danger); }
+.optLetter { width: 28px; height: 28px; border-radius: 6px; background: var(--bg2); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; flex-shrink: 0; }
+.openAnswer { width: 100%; border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 0.75rem 1rem; font-size: 14px; color: var(--txt); background: var(--bg); resize: none; }
+.openAnswer:focus { outline: none; border-color: var(--accent); }
+.feedback { display: flex; align-items: flex-start; gap: 8px; margin-top: 1rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 13px; line-height: 1.5; }
+.feedback i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.feedbackOk { background: var(--success-light); color: var(--success); }
+.feedbackKo { background: var(--danger-light); color: var(--danger); }
+.btnRow { display: flex; justify-content: flex-end; margin-top: 1rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.5rem; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--border); background: var(--bg); color: var(--txt); }
+.btnPrimary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btnPrimary:hover:not(:disabled) { opacity: 0.9; }
+.btnPrimary:disabled { opacity: 0.45; cursor: not-allowed; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
