@@ -1,6 +1,5 @@
-// src/modules/quiz/quiz.controller.js
 
-import { generateQuiz } from "../services/quiz.service.js";
+import { generateQuiz, submitQuiz, getMyQuizzes as _getMyQuizzes  } from "../services/quiz.service.js";
 
 async function generate(req, res) {
   try {
@@ -20,4 +19,49 @@ async function generate(req, res) {
   }
 }
 
-export default { generate };
+async function submit(req, res) {
+  try {
+    const userId = req.user.id;
+
+    const { quizId } = req.params;
+
+    const { answers } = req.body;
+
+    const result = await submitQuiz({
+      quizId,
+      userId,
+      answers,
+    });
+
+    res.json(result);
+
+  } catch (err) {
+
+    console.error(err);
+
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+async function getMyQuizzes(req, res) {
+  try {
+    const quizzes = await _getMyQuizzes(
+      req.user.id
+    );
+
+    res.json(quizzes);
+
+  } catch (err) {
+
+    console.error(err);
+
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+
+export default { generate, submit, getMyQuizzes, };
