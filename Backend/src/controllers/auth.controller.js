@@ -1,4 +1,4 @@
-import { register as _register, login as _login, refresh as _refresh } from "../services/auth.service.js";
+import { register as _register, login as _login, refresh as _refresh, me as _me } from "../services/auth.service.js";
 
 const cookieOptions = {
   httpOnly: true,
@@ -14,7 +14,7 @@ async function register(req, res) {
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
 
-    res.json({ user });
+    res.json({ user, accessToken, refreshToken });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -28,7 +28,7 @@ async function login(req, res) {
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
 
-    res.json({ user });
+    res.json({ user, accessToken, refreshToken });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -36,13 +36,13 @@ async function login(req, res) {
 
 async function refresh(req, res) {
   try {
-    const token = req.cookies.refreshToken;
+    const token = req.cookies?.refreshToken ?? req.headers.authorization?.split(" ")[1];
 
     const { accessToken } = await _refresh(token);
 
     res.cookie("accessToken", accessToken, cookieOptions);
 
-    res.json({ success: true });
+    res.json({ accessToken });
   } catch (err) {
     res.status(401).json({ message: err.message });
   }
@@ -54,9 +54,21 @@ async function logout(req, res) {
 
   res.json({ message: "Logged out" });
 }
+
+async function me(req, res) {
+  try {
+    const user = await _me(req.user.id);
+    if (!user) throw new Error("User not found");
+    res.json({ user });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+}
+
 export default {
   register,
   login,
   refresh,
-  logout
+  logout,
+  me,
 };

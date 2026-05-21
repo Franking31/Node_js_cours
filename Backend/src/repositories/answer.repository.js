@@ -1,16 +1,7 @@
 import prisma from "../config/prisma.js";
 
-
-async function createAnswers(datas) {
-  return prisma.answer.createMany({
-    data: {
-        quizId: datas.quizId,
-        questionId: datas.questionId,
-        userId: datas.userId,
-        userAnswer: datas.userAnswer,
-        isCorrect: datas.isCorrect
-    },
-  });
+async function createAnswers(data) {
+  return prisma.answer.createMany({ data });
 }
 
 export { createAnswers };
