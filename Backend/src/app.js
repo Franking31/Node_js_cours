@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import router from './routes/index.js'
+import setupSwagger from './config/swagger.js'
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use("/api", router)
+setupSwagger(app);
 
 export default app;
