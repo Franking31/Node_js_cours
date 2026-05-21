@@ -17,6 +17,7 @@ router.get('/',(req, res, next)=>{
         message:'quiz api est lance ...'
     })
 });
+router.get('/me', authMiddleware, authController.me);
 
 
 export default router;

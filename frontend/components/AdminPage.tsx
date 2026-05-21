@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { UserProfile } from "@/lib/types";
 import styles from "../modules/AdminPage.module.css";
 
@@ -25,11 +25,11 @@ export default function AdminPage({ onBack, onLogout }: Props) {
   useEffect(() => {
     fetchUsers();
   }, []);
-
+  const API = "http://localhost:3000"; 
   async function fetchUsers() {
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/users", { credentials: "include" });
+      const res = await fetch(`${API}/api/admin/users`, { credentials: "include" });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       setUsers(data);
@@ -45,7 +45,7 @@ export default function AdminPage({ onBack, onLogout }: Props) {
     setSuccessMsg(null);
     setErrorMsg(null);
     try {
-      const res = await fetch(`/api/admin/users/${userId}`, {
+      const res = await fetch(`${API}/api/admin/users/${userId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -145,103 +145,107 @@ export default function AdminPage({ onBack, onLogout }: Props) {
       </div>
 
       {/* ── Tableau ── */}
-      {loading ? (
+        {loading ? (
         <div className={styles.loadingRow}>
-          <span className={styles.spinner} /> Chargement…
+            <span className={styles.spinner} /> Chargement…
         </div>
-      ) : filtered.length === 0 ? (
+        ) : filtered.length === 0 ? (
         <div className={styles.emptyState}>
-          <i className="ti ti-users-minus" aria-hidden="true" />
-          <p>Aucun utilisateur trouvé.</p>
+            <i className="ti ti-users-minus" aria-hidden="true" />
+            <p>Aucun utilisateur trouvé.</p>
         </div>
-      ) : (
+        ) : (
         <div className={styles.tableWrap}>
-          <table className={styles.table}>
+            <table className={styles.table}>
             <thead>
-              <tr>
+                <tr>
                 <th>Utilisateur</th>
                 <th>E-mail</th>
                 <th>Rôle</th>
                 <th>Inscrit le</th>
                 <th>Quiz</th>
                 <th>Actions</th>
-              </tr>
+                </tr>
             </thead>
             <tbody>
-              {filtered.map((u) => (
-                <>
-                  <tr key={u.id} className={confirmId === u.id ? styles.rowPending : ""}>
+                {filtered.map((u) => (
+                <Fragment key={u.id}>
+                    <tr className={confirmId === u.id ? styles.rowPending : ""}>
                     <td>
-                      <div className={styles.userCell}>
+                        <div className={styles.userCell}>
                         <div className={styles.avatar}>{u.name.charAt(0).toUpperCase()}</div>
                         <span>{u.name}</span>
-                      </div>
+                        </div>
                     </td>
                     <td className={styles.emailCell}>{u.email}</td>
                     <td>
-                      <span className={`${styles.roleBadge} ${u.role === "ADMIN" ? styles.roleAdmin : styles.roleStudent}`}>
+                        <span className={`${styles.roleBadge} ${u.role === "ADMIN" ? styles.roleAdmin : styles.roleStudent}`}>
                         {u.role === "ADMIN" ? "Admin" : "Étudiant"}
-                      </span>
+                        </span>
                     </td>
                     <td>
-                      {new Date(u.createdAt).toLocaleDateString("fr-FR", {
-                        day: "2-digit", month: "short", year: "numeric",
-                      })}
+                        {new Date(u.createdAt).toLocaleDateString("fr-FR", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                        })}
                     </td>
                     <td>{u._count?.quizzes ?? "—"}</td>
                     <td>
-                      {u.role !== "ADMIN" && (
+                        {u.role !== "ADMIN" && (
                         <button
-                          className={styles.deleteBtn}
-                          onClick={() => setConfirmId(u.id)}
-                          disabled={deletingId === u.id}
-                          title="Supprimer cet utilisateur"
+                            className={styles.deleteBtn}
+                            onClick={() => setConfirmId(u.id)}
+                            disabled={deletingId === u.id}
+                            title="Supprimer cet utilisateur"
                         >
-                          <i className="ti ti-trash" aria-hidden="true" />
-                          Supprimer
+                            <i className="ti ti-trash" aria-hidden="true" />
+                            Supprimer
                         </button>
-                      )}
+                        )}
                     </td>
-                  </tr>
-
-                  {/* ── Confirmation inline ── */}
-                  {confirmId === u.id && (
-                    <tr key={`${u.id}-confirm`} className={styles.confirmRow}>
-                      <td colSpan={6}>
-                        <div className={styles.confirmBox}>
-                          <i className="ti ti-alert-triangle" aria-hidden="true" />
-                          <span>
-                            Supprimer <strong>{u.name}</strong> ? Cette action est irréversible et supprimera aussi tous ses quiz.
-                          </span>
-                          <div className={styles.confirmActions}>
-                            <button
-                              className={`${styles.btn} ${styles.btnDanger}`}
-                              onClick={() => handleDelete(u.id, u.name)}
-                              disabled={deletingId === u.id}
-                            >
-                              {deletingId === u.id ? (
-                                <><span className={styles.spinner} /> Suppression…</>
-                              ) : (
-                                <>Confirmer</>
-                              )}
-                            </button>
-                            <button
-                              className={`${styles.btn} ${styles.btnSecondary}`}
-                              onClick={() => setConfirmId(null)}
-                            >
-                              Annuler
-                            </button>
-                          </div>
-                        </div>
-                      </td>
                     </tr>
-                  )}
-                </>
-              ))}
+
+                    {/* Confirmation inline */}
+                    {confirmId === u.id && (
+                    <tr key={`${u.id}-confirm`} className={styles.confirmRow}>
+                        <td colSpan={6}>
+                        <div className={styles.confirmBox}>
+                            <i className="ti ti-alert-triangle" aria-hidden="true" />
+                            <span>
+                            Supprimer <strong>{u.name}</strong> ? Cette action est irréversible et supprimera aussi tous ses quiz.
+                            </span>
+                            <div className={styles.confirmActions}>
+                            <button
+                                className={`${styles.btn} ${styles.btnDanger}`}
+                                onClick={() => handleDelete(u.id, u.name)}
+                                disabled={deletingId === u.id}
+                            >
+                                {deletingId === u.id ? (
+                                <>
+                                    <span className={styles.spinner} /> Suppression…
+                                </>
+                                ) : (
+                                <>Confirmer</>
+                                )}
+                            </button>
+                            <button
+                                className={`${styles.btn} ${styles.btnSecondary}`}
+                                onClick={() => setConfirmId(null)}
+                            >
+                                Annuler
+                            </button>
+                            </div>
+                        </div>
+                        </td>
+                    </tr>
+                    )}
+                </Fragment>
+                ))}
             </tbody>
-          </table>
+            </table>
         </div>
-      )}
+        )}
     </div>
   );
 }
