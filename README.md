@@ -283,7 +283,34 @@ Feature: Authentification
     And il est redirigé vers la page de connexion
     And un message confirme qu’il a été déconnecté
 
+## Diagramme 
+MCD
+┌──────────────┐        1,N        ┌──────────────┐
+│    USER      │──────────────────▶│    COURSE     │
+└──────────────┘                   └──────────────┘
+        │ 1,N                               │ 1,N
+        ▼                                    ▼
+┌──────────────┐        1,N        ┌──────────────┐
+│     QUIZ     │──────────────────▶│   QUESTION    │
+└──────────────┘                   └──────────────┘
+        │ 1,N           1,N                │
+        └──────────────────────────────────┘
+                       ▼
+                ┌──────────────┐
+                │    ANSWER     │
+                └──────────────┘
+Les relation 
 
+User (1) —— (N) Course
+User (1) —— (N) Quiz
+Course (1) —— (N) Quiz
+Quiz (1) —— (N) Question
+Quiz (1) —— (N) Answer
+Question (1) —— (N) Answer
+User (1) —— (N) Answer
+
+
+## Structure
 Backend/
 │── prisma/
 │   ├── schema.prisma
@@ -468,19 +495,15 @@ Lancer les tests : `npm test`
 #   CI/CD
 
 Pipeline recommandé 
-    - Lint + Tests unitaires
-    - Tests d’intégration
-    - Build Docker
-    - Déploiement automatique (Railway, Render, Docker Hub, VPS…)
+    Lint + Tests unitaires
+    Tests d’intégration
+    Build Docker
+    Déploiement automatique (Railway, Render, Docker Hub, VPS…)
 Exemple GitHub Actions : `.github/workflows/ci.yml`
 
 #   Déploiement 
 
-Ajouter ici 
-    - URL API (Production) 
-    - URL Swagger (Si disponible)
-    - URL documentation
 Le lien frontend
-    . https://node-js-cours-vuxo.vercel.app/
+    https://node-js-cours-vuxo.vercel.app/
 Le lien du Backend 
     
