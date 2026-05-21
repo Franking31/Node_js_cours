@@ -1,5 +1,5 @@
 
-import { generateQuiz, submitQuiz, getMyQuizzes as _getMyQuizzes  } from "../services/quiz.service.js";
+import { generateQuiz, submitQuiz, getMyQuizzes as _getMyQuizzes, getQuizzesByCourse as _getQuizzesByCourse  } from "../services/quiz.service.js";
 
 async function generate(req, res) {
   try {
@@ -63,5 +63,22 @@ async function getMyQuizzes(req, res) {
   }
 }
 
+async function getQuizzesByCourse(req, res) {
+  try {
+    const { courseId } = req.params;
 
-export default { generate, submit, getMyQuizzes, };
+    const quizzes = await _getQuizzesByCourse(courseId);
+
+    res.json(quizzes);
+
+  } catch (err) {
+
+    console.error(err);
+
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+export default { generate, submit, getMyQuizzes, getQuizzesByCourse };

@@ -32,9 +32,13 @@ async function findQuizById(id) {
   });
 }
 
-async function createAnswers(data) {
-  return prisma.answer.createMany({
-    data,
+async function findQuizzesByCourseId(courseId) {
+  return prisma.quiz.findMany({
+    where: { courseId },
+    include: {
+      questions: true,
+      answers: true,
+    },
   });
 }
 
@@ -73,11 +77,13 @@ async function getUserQuizzes(userId) {
   });
 }
 
+
+
 export {
   findQuizById,
-  createAnswers,
   updateQuizScore,
   getUserQuizzes,
+  createQuizWithQuestions,
+  findQuizzesByCourseId,
 };
 
-export { createQuizWithQuestions };

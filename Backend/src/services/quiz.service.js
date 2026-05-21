@@ -1,9 +1,9 @@
 // src/modules/quiz/quiz.service.js
 
+import { createAnswers } from "../repositories/answer.repository.js";
 import { createCourse } from "../repositories/course.repository.js";
 import { createQuizWithQuestions, 
   findQuizById,
-  createAnswers,
   updateQuizScore,
   getUserQuizzes, } from "../repositories/quiz.repository.js";
 import { generateQuiz as _generateQuiz } from "./grok.service.js";
@@ -88,7 +88,7 @@ async function submitQuiz({
     );
 
     if (!question) {
-      throw new Error("Question not found");
+      throw new Error("Question not found", question);
     }
 
     const isCorrect = evaluateAnswer(
@@ -129,9 +129,14 @@ async function getMyQuizzes(userId) {
   return getUserQuizzes(userId);
 }
 
+async function getQuizzesByCourse(courseId) {
+  return findQuizzesByCourseId(courseId);
+}
+
 
 export {
   generateQuiz,
   submitQuiz,
   getMyQuizzes,
+  getQuizzesByCourse,
 };
