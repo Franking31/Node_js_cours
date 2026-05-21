@@ -1,4 +1,42 @@
 services:
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: quiz_app_frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=${FRONTEND_PORT}
+      - NEXT_PUBLIC_API_URL=http://backend:${API_PORT}
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    
+    networks:
+      - quizz_app_network
+    depends_on:
+      - backend
+
+
+  backend:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: quiz_app_backend
+    restart: unless-stopped
+    env_file:
+      - ./Backend/.env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "${API_PORT}:${API_PORT}"
+  
+    networks:
+      - quizz_app_network
+    depends_on:
+      - postgres
+
+
   postgres:
     image: postgres:16
     container_name: quiz_app_postgres
