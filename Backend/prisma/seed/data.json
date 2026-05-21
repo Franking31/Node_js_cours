@@ -1,0 +1,42 @@
+{
+  "students": [
+    {
+      "name": "John Student",
+      "email": "john@student.com",
+      "password": "Student123",
+      "courses": [
+        {
+          "title": "Introduction JavaScript",
+          "subject": "JavaScript",
+          "level": "Licence 3",
+          "content": "JavaScript est un langage de programmation utilise pour le developpement web."
+        },
+        {
+          "title": "Base de donnees SQL",
+          "subject": "Database",
+          "level": "Licence 3",
+          "content": "SQL permet de manipuler les bases de donnees relationnelles."
+        }
+      ]
+    },
+    {
+      "name": "Alice Student",
+      "email": "alice@student.com",
+      "password": "Student123",
+      "courses": [
+        {
+          "title": "Architecture Logicielle",
+          "subject": "Software Engineering",
+          "level": "Master 1",
+          "content": "Une architecture logicielle organise les composants d'une application."
+        },
+        {
+          "title": "Reseaux Informatiques",
+          "subject": "Networking",
+          "level": "Licence 3",
+          "content": "Les reseaux permettent la communication entre machines."
+        }
+      ]
+    }
+  ]
+}
