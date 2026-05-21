@@ -1,26 +1,54 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --syne: 'Syne', sans-serif;
+  --mono: 'DM Mono', monospace;
+  --accent: #534AB7;
+  --accent-light: #EEEDFE;
+  --accent-mid: #CECBF6;
+  --success: #3B6D11;
+  --success-light: #EAF3DE;
+  --danger: #A32D2D;
+  --danger-light: #FCEBEB;
+  --warn: #854F0B;
+  --warn-light: #FAEEDA;
+  --bg: #ffffff;
+  --bg2: #f5f5f3;
+  --bg3: #eeede8;
+  --txt: #1a1a1a;
+  --txt2: #6b6b68;
+  --border: rgba(0,0,0,0.12);
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #1a1a1a;
+    --bg2: #242424;
+    --bg3: #2e2e2e;
+    --txt: #f0efe8;
+    --txt2: #8a8a85;
+    --border: rgba(255,255,255,0.12);
+    --accent-light: #26215C;
+    --accent-mid: #3C3489;
+    --success-light: #173404;
+    --danger-light: #501313;
+    --warn-light: #412402;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--syne);
+  background: var(--bg3);
+  color: var(--txt);
+  min-height: 100vh;
+}
+
+input, select, textarea, button {
+  font-family: var(--syne);
 }
