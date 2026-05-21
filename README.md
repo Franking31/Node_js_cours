@@ -458,7 +458,7 @@ Le projet inclut un fichier `docker-compose.yml` permettant de lancer :
         - Middlewares
         - Repositories
 
-3    Tests E2E
+3.   Tests E2E
         - API complète
         - Base de données réelle
         - Scénarios utilisateur
@@ -467,7 +467,7 @@ Lancer les tests : `npm test`
 
 #   CI/CD
 
-Pipeline recommandé :
+Pipeline recommandé 
     - Lint + Tests unitaires
     - Tests d’intégration
     - Build Docker
@@ -476,11 +476,11 @@ Exemple GitHub Actions : `.github/workflows/ci.yml`
 
 #   Déploiement 
 
-Ajouter ici :
+Ajouter ici 
     - URL API (Production) 
     - URL Swagger (Si disponible)
     - URL documentation
 Le lien frontend
-    https://node-js-cours-vuxo.vercel.app/
+    . https://node-js-cours-vuxo.vercel.app/
 Le lien du Backend 
     
