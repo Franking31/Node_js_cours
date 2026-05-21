@@ -25,10 +25,12 @@ jobs:
       - name: Installer les dépendances
         run: npm install
         working-directory: ./Backend
-        
+
       - name: Générer le client Prisma
         run: npx prisma generate
         working-directory: ./Backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # ← Ajouté ici
 
       - name: Lancer les tests
         run: npm test
@@ -39,5 +41,3 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GROQUERY_API_KEY: ${{ secrets.GROQUERY_API_KEY }}
           FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
-
-          
