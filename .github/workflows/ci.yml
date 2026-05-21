@@ -24,12 +24,13 @@ jobs:
 
       - name: Installer les dépendances
         run: npm install
+        working-directory: ./backend
 
       - name: Lancer les tests
         run: npm test
+        working-directory: ./backend
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GROQUERY_API_KEY: ${{ secrets.GROQUERY_API_KEY }}
-        
