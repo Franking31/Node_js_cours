@@ -2,14 +2,17 @@ import { hash, compare } from "bcrypt";
 import { findByEmail, createUser, findById } from "../repositories/auth.repository.js";
 import { signAccessToken, signRefreshToken, verifyRefresh } from "../config/jwt.js";
 
+async function me(userId) {
+  return findById(userId);
+}
 async function register(data) {
-  const existing = await repo.findByEmail(data.email);
+  const existing = await findByEmail(data.email);
 
   if (existing) throw new Error("User already exists");
 
-  const hashedPassword = await bcrypt.hash(data.password, 12);
+  const hashedPassword = await hash(data.password, 12);
 
-  const user = await repo.createUser({
+  const user = await createUser({
     email: data.email,
     name: data.name,
     password: hashedPassword,
@@ -23,11 +26,11 @@ async function register(data) {
 }
 
 async function login(data) {
-  const user = await repo.findByEmail(data.email);
+  const user = await findByEmail(data.email);
 
   if (!user) throw new Error("Invalid credentials");
 
-  const isValid = await bcrypt.compare(data.password, user.password);
+  const isValid = await compare(data.password, user.password);
 
   if (!isValid) throw new Error("Invalid credentials");
 
@@ -40,7 +43,7 @@ async function login(data) {
 async function refresh(token) {
   const payload = verifyRefresh(token);
 
-  const user = await repo.findById(payload.id);
+  const user = await findById(payload.id);
 
   if (!user) throw new Error("User not found");
 
@@ -53,4 +56,5 @@ export {
   register,
   login,
   refresh,
+  me,
 };
