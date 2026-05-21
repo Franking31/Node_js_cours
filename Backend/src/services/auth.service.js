@@ -2,6 +2,9 @@ import { hash, compare } from "bcrypt";
 import { findByEmail, createUser, findById } from "../repositories/auth.repository.js";
 import { signAccessToken, signRefreshToken, verifyRefresh } from "../config/jwt.js";
 
+async function me(userId) {
+  return findById(userId);
+}
 async function register(data) {
   const existing = await findByEmail(data.email);
 
@@ -53,4 +56,5 @@ export {
   register,
   login,
   refresh,
+  me,
 };
