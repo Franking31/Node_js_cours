@@ -5,8 +5,8 @@ import { register as _register, login as _login, refresh as _refresh, me as _me 
 const isProd = env.NODE_ENV === "production";
 const cookieOptions = {
   httpOnly: true,
-  secure: isProd,
-  sameSite: isProd ? "lax" : "none",
+  secure: false,
+  sameSite: "lax",
 };
 
 async function register(req, res) {
