@@ -62,7 +62,13 @@ La Plateforme de Génération de Quiz Intelligent est une application backend pe
 Backend/
 │── prisma/
 │   ├── schema.prisma
+│   ├── seed/
+│   │   ├── seed.js
+│   │   ├── data.json
 │   ├── migrations/
+│   │   ├── mmigration_lock.toml
+│   │   ├──20260520094135_init/
+│   │   │   ├──migration.sql
 │── src/
 │   ├── app.js
 │   ├── server.js
@@ -71,19 +77,93 @@ Backend/
 │   │   ├── prisma.js
 │   │   ├── jwt.js
 │   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   ├── admin.controller.js
+│   │   ├── quiz.controller.js
 │   ├── middlewares/
+│   │   ├── auth.middleware.js
+│   │   ├── error.middleware.js
+│   │   ├── validation.middleware.js
 │   ├── repositories/
+│   │   ├── auth.repository.js
+│   │   ├── course.repository.js
+│   │   ├── quiz.repository.js
+│   │   ├── answer.repository.js
 │   ├── routes/
+│   │   ├── auth.routes.js
+│   │   ├── admin.routes.js
+│   │   ├── quiz.routes.js
+│   │   ├── index.js
 │   ├── services/
+│   │   ├── auth.service.js
+│   │   ├── grok.service.js
+│   │   ├── quiz.service.js
+│   │   ├── user.service.js
 │   ├── validators/
+│   │   ├── auth.validator.js
+│   │   ├── quiz.validator.js
 │── tests/
 │   ├── unit/
+│   │   ├── auth.service.test.js
+│   │   ├── quiz.service.test.js
 │   ├── integration/
+│   │   ├── auth.routes.test.js
 │   ├── e2e/
+│   │   ├── api.e2e.test.js
 │   ├── setup/
+│   │   ├── test.env.js
+│   │   ├── jwt.mock.js
+│   │   ├── prisma.mock.js
+│   ├── support/
+│   │   ├── config.js
+│   │   ├── hooks.js
+│   │   ├── world.js
+│   ├── features/
+│   │   ├── auth.feature
 │── .env.example
 │── docker-compose.yml
 │── package.json
+Frontend/
+│── app/
+│   ├──  favicon.ico
+│   ├──globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── api/
+│        ├── generate
+│            ├── route.ts
+│── componets/
+│   ├── loadingPhase.tsx
+│   ├── LoginPage.tsx
+│   ├── QuizApp.tsx
+│   ├── RegisterPage.tsx
+│   ├── ResultsPhase.tsx
+│   ├── UploadPhase.tsx
+├── lib/
+│   ├── generateQuiz.ts
+│   ├── Types.ts
+├── modules/
+│   ├── loadingPhase.modules.css
+│   ├── LoginPage.modules.css
+│   ├── QuizApp.modules.css
+│   ├── QuizPhase.modules.css
+│   ├── RegisterPage.modules.css
+│   ├── ResultsPhase.modules.css
+│   ├── UploadPhase.modules.css
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── next.svg
+│   ├── vercel.svg
+│   ├── window.svg
+├── .gitignore
+├── eslint.config.mjs
+├── next.config.ts
+├── package.-lock.json
+├── package.json
+│── postcss.config
+│── README.md
+│── tsconfig.json
 
 #   Installation
 
