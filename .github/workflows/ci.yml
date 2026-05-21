@@ -7,6 +7,7 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -31,3 +32,4 @@ jobs:
           JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           GROQUERY_API_KEY: ${{ secrets.GROQUERY_API_KEY }}
+        
