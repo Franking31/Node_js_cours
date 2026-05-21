@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { UserProfile, QuizHistoryItem, QuestionType } from "@/lib/types";
 import styles from "../modules/DashboardPage.module.css";
+import { API } from "@/lib/config";
 
 interface Props {
   user: UserProfile;
@@ -29,8 +30,6 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
   const [history, setHistory] = useState<QuizHistoryItem[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState<QuizHistoryItem | null>(null);
-  const API_BASE_URL = "http://localhost:3000"; // ← à extraire dans un fichier de config si besoin
-
   /* ── Charger l'historique au montage ── */
   useEffect(() => {
     if (tab === "history") fetchHistory();
@@ -39,7 +38,7 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
   async function fetchHistory() {
     setHistoryLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/quiz/me`, { credentials: "include" });
+      const res = await fetch(`${API}/api/quiz/me`, { credentials: "include" });
       const data = await res.json();
       if (res.ok) setHistory(data);
     } catch (e) {
@@ -57,7 +56,7 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
       const body: any = { name, email };
       if (newPassword.trim()) body.password = newPassword;
 
-      const res = await fetch(`${API_BASE_URL}/api/user/me`, {
+      const res = await fetch(`${API}/api/user/me`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -78,7 +77,7 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
   /* ── Supprimer le compte ── */
   async function handleDeleteAccount() {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/user/me`, {
+      const res = await fetch(`${API}/api/user/me`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -92,7 +91,7 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
   /* ── Supprimer un quiz de l'historique ── */
   async function handleDeleteQuiz(quizId: string) {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/quiz/${quizId}`, {
+      const res = await fetch(`${API}/api/quiz/${quizId}`, {
         method: "DELETE",
         credentials: "include",
       });
