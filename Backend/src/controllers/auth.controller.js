@@ -14,7 +14,7 @@ async function register(req, res) {
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
 
-    res.json({ user });
+    res.json({ user, accessToken, refreshToken });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -28,7 +28,7 @@ async function login(req, res) {
     res.cookie("accessToken", accessToken, cookieOptions);
     res.cookie("refreshToken", refreshToken, cookieOptions);
 
-    res.json({ user });
+    res.json({ user, accessToken, refreshToken });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -36,13 +36,13 @@ async function login(req, res) {
 
 async function refresh(req, res) {
   try {
-    const token = req.cookies.refreshToken;
+    const token = req.cookies?.refreshToken ?? req.headers.authorization?.split(" ")[1];
 
     const { accessToken } = await _refresh(token);
 
     res.cookie("accessToken", accessToken, cookieOptions);
 
-    res.json({ success: true });
+    res.json({ accessToken });
   } catch (err) {
     res.status(401).json({ message: err.message });
   }
@@ -64,10 +64,11 @@ async function me(req, res) {
     res.status(404).json({ message: err.message });
   }
 }
+
 export default {
   register,
   login,
   refresh,
   logout,
-  me
+  me,
 };
