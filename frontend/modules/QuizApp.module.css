@@ -1,0 +1,88 @@
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo i {
+  color: #fff;
+  font-size: 22px;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--txt);
+}
+
+.header p {
+  font-size: 13px;
+  color: var(--txt2);
+  margin-top: 2px;
+}
+
+.steps {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 2.5rem;
+}
+
+.step {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.3s;
+}
+/* À AJOUTER dans ton QuizApp.module.css existant */
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .45rem .9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: transparent;
+  color: var(--text, #e8e8f0);
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.navBtn:hover { background: rgba(255,255,255,.08); }
+
+.navBtnDanger {
+  color: #f87171;
+  border-color: rgba(248,113,113,.25);
+}
+.navBtnDanger:hover { background: rgba(248,113,113,.1) !important; }
+
+.step.done { background: var(--accent); }
+.step.active { background: var(--accent); opacity: 0.45; }

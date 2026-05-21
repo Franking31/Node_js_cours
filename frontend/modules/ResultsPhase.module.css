@@ -1,0 +1,25 @@
+.container { animation: fadeIn 0.3s ease; }
+.phase { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--txt2); margin-bottom: 0.75rem; }
+.hero { text-align: center; padding: 2rem 1rem; }
+.ring { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+.num { font-size: 30px; font-weight: 800; color: var(--accent); line-height: 1; }
+.den { font-size: 13px; color: var(--txt2); }
+.hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 0.5rem; }
+.hero p { font-size: 14px; color: var(--txt2); }
+.statsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.5rem 0; }
+.statCard { background: var(--bg2); border-radius: var(--radius-md); padding: 0.75rem 1rem; text-align: center; }
+.val { font-size: 22px; font-weight: 800; }
+.lbl { font-size: 11px; color: var(--txt2); margin-top: 2px; }
+.divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
+.reviewList { display: flex; flex-direction: column; gap: 8px; }
+.reviewItem { display: flex; align-items: flex-start; gap: 10px; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 0.5px solid var(--border); font-size: 13px; }
+.reviewItem i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.reviewOk { border-color: var(--success); color: var(--success); }
+.reviewKo { border-color: var(--danger); }
+.reviewQ { font-weight: 500; line-height: 1.4; color: var(--txt); }
+.reviewAns { font-size: 12px; color: var(--txt2); margin-top: 4px; }
+.btnRow { display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.25rem; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--border); background: var(--bg); color: var(--txt); }
+.btnPrimary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btnPrimary:hover { opacity: 0.9; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }

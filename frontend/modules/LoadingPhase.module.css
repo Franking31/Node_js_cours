@@ -1,0 +1,17 @@
+.container { text-align: center; padding: 3rem 2rem; animation: fadeIn 0.3s ease; }
+.spinner {
+  width: 44px; height: 44px;
+  border: 3px solid var(--accent-light);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1.25rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.container h3 { font-size: 18px; font-weight: 700; margin-bottom: 0.4rem; }
+.container p { font-size: 13px; color: var(--txt2); }
+.stepList { list-style: none; max-width: 260px; margin: 1.5rem auto 0; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--txt2); transition: color 0.3s; }
+.step i { font-size: 16px; }
+.step.done { color: var(--success); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
