@@ -10,7 +10,11 @@ import { env } from './config/env.js';
 
 const app = express();
 
-app.use(cors({ origin: env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: env.FRONTEND_URL, credentials: true,
+    // ✅ Ajouter les méthodes et headers explicitement
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+ }));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(compression());
