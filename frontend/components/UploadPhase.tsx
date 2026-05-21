@@ -14,7 +14,8 @@ const TYPE_OPTIONS: { value: QuestionType; label: string }[] = [
 ];
 
 export default function UploadPhase({ onGenerate }: Props) {
-  const [courseText, setCourseText] = useState("");
+  const [content, setContent] = useState(""); 
+  const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   const [level, setLevel] = useState("licence3");
   const [questionCount, setQuestionCount] = useState(20);
@@ -25,7 +26,7 @@ export default function UploadPhase({ onGenerate }: Props) {
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = e.target?.result as string;
-      setCourseText(text.substring(0, 8000));
+      setContent(text.substring(0, 8000));
     };
     reader.readAsText(file);
   }
@@ -39,12 +40,23 @@ export default function UploadPhase({ onGenerate }: Props) {
   }
 
   function handleSubmit() {
-    if (!courseText.trim() || courseText.trim().length < 50) {
-      alert("Merci de coller un cours d'au moins 50 caractères.");
-      return;
-    }
-    onGenerate({ courseText, subject: subject || "Général", level, questionCount, selectedTypes });
+  if (!content.trim() || content.trim().length < 50) {
+    alert("Merci de coller un cours d'au moins 50 caractères.");
+    return;
   }
+  if (!title.trim()) {
+    alert("Merci de donner un titre à ton cours.");
+    return;
+  }
+      onGenerate({
+    title: title.trim(),
+    content,                                   // ← était courseText
+    subject: subject || "Général",
+    level: level as any,
+    questionCount,
+    selectedTypes,
+  });
+}
 
   return (
     <div className={styles.container}>
@@ -79,34 +91,42 @@ export default function UploadPhase({ onGenerate }: Props) {
 
       <textarea
         className={styles.textarea}
-        value={courseText}
-        onChange={(e) => setCourseText(e.target.value)}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
         placeholder={"Colle ici le contenu de ton cours…\n\nEx : La photosynthèse est le processus par lequel les plantes convertissent la lumière solaire en énergie chimique stockée..."}
         rows={8}
       />
 
       <div className={styles.metaRow}>
-        <div className={styles.field}>
-          <label>Matière / Module</label>
-          <input
-            type="text"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            placeholder="Ex : Biologie cellulaire"
-          />
-        </div>
-        <div className={styles.field}>
-          <label>Niveau</label>
-          <select value={level} onChange={(e) => setLevel(e.target.value)}>
-            <option value="licence1">Licence 1</option>
-            <option value="licence2">Licence 2</option>
-            <option value="licence3">Licence 3</option>
-            <option value="master1">Master 1</option>
-            <option value="master2">Master 2</option>
-          </select>
-        </div>
-      </div>
-
+  <div className={styles.field}>
+    <label>Titre du cours</label>
+    <input
+      type="text"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+      placeholder="Ex : Biologie cellulaire — Cours 3"
+    />
+  </div>
+  <div className={styles.field}>
+    <label>Matière / Module</label>
+    <input
+      type="text"
+      value={subject}
+      onChange={(e) => setSubject(e.target.value)}
+      placeholder="Ex : Biologie cellulaire"
+    />
+  </div>
+  <div className={styles.field}>
+    <label>Niveau</label>
+    <select value={level} onChange={(e) => setLevel(e.target.value)}>
+      <option value="licence1">Licence 1</option>
+      <option value="licence2">Licence 2</option>
+      <option value="licence3">Licence 3</option>
+      <option value="master1">Master 1</option>
+      <option value="master2">Master 2</option>
+    </select>
+  </div>
+</div>
       <div className={styles.divider} />
       <p className={styles.phase}>Type de questions</p>
 

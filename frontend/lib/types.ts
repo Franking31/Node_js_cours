@@ -1,5 +1,7 @@
 export type QuestionType = "qcm" | "vf" | "ouvert";
 
+export type Level = "licence1" | "licence2" | "licence3" | "master1" | "master2";
+
 export interface Question {
   type: QuestionType;
   question: string;
@@ -9,11 +11,10 @@ export interface Question {
 }
 
 export interface QuizConfig {
-  title: string;       // ← ajouter
-  content: string;
-  courseText: string;
+  title: string;            // ← titre du cours
+  content: string;          // ← contenu brut (était courseText)
   subject: string;
-  level: string;
+  level: Level;
   questionCount: number;
   selectedTypes: QuestionType[];
 }

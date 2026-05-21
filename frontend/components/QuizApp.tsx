@@ -63,18 +63,24 @@ async function handleRegister(name: string, email: string, password: string) {
 }
 
   /* ── Quiz ── */
+  const API_BASE_URL = "http://localhost:3000";
   async function handleGenerate(config: QuizConfig) {
   setPhase("loading");
+
   try {
-    const res = await fetch("http://localhost:3000/api/quiz/generate", {
+    console.log("📤 Envoi vers backend :", config);
+
+    const res = await fetch(`${API_BASE_URL}/api/quiz/generate`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json" 
+      },
       credentials: "include",
       body: JSON.stringify({
         course: {
           title: config.title,
           content: config.content,
-          subject: config.subject,
+          subject: config.subject || "Général",
           level: config.level,
         },
         quizConfig: {
@@ -84,15 +90,22 @@ async function handleRegister(name: string, email: string, password: string) {
       }),
     });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || "Erreur de génération");
+    console.log("Status reçu :", res.status);
 
-    setQuestions(data.questions);
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      console.error("Erreur backend :", errorData);
+      throw new Error(errorData.message || `Erreur serveur (${res.status})`);
+    }
+
+    const data = await res.json();
+    setQuestions(data.questions || data);
     setAnswers([]);
     setPhase("quiz");
-  } catch (e) {
-    console.error(e);
-    alert("Erreur de génération. Vérifie que ton cours contient suffisamment de contenu.");
+
+  } catch (e: any) {
+    console.error("❌ Erreur génération :", e);
+    alert(e.message || "Erreur de génération. Vérifie que ton cours est assez long.");
     setPhase("upload");
   }
 }
