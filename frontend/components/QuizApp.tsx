@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QuizQuestion, QuizConfig, SubmitAnswer, SubmitResponse, UserProfile } from "@/lib/types";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./ResgisterPage";
@@ -21,6 +21,43 @@ export default function QuizApp() {
   const [quizId, setQuizId] = useState<string | null>(null);
   const [submitResponse, setSubmitResponse] = useState<SubmitResponse | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+
+  /* ── Vérifier si l'utilisateur est déjà connecté au montage ── */
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+ async function checkAuth() {
+  try {
+    let res = await fetch(`${API}/api/auth/me`, { credentials: "include" });
+
+    if (!res.ok) {
+      // Tentative de refresh
+      const refreshRes = await fetch(`${API}/api/auth/refresh`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (refreshRes.ok) {
+        res = await fetch(`${API}/api/auth/me`, { credentials: "include" });
+      }
+    }
+
+    if (res.ok) {
+      const data = await res.json();
+      setUser(data.user);
+      setPhase("upload");
+    } else {
+      setPhase("login");
+    }
+  } catch (err) {
+    setPhase("login");
+  } finally {
+    setIsLoadingUser(false);
+  }
+}
 
   /* ── Auth ── */
   async function handleLogin(email: string, password: string) {
