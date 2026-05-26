@@ -13,7 +13,7 @@ const quizConfigSchema = z.object({
   const courseSchema = z.object({
       title: z.string().min(3),
 
-      content: z.string().min(100),
+      content: z.string().min(10),
 
       subject: z.string().min(2).max(200),
 
@@ -23,7 +23,6 @@ const quizConfigSchema = z.object({
 const quizSchema = z.object({
   body: z.object({
     course: courseSchema,
-
     quizConfig: quizConfigSchema,
   })
 });

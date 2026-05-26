@@ -1,31 +1,33 @@
-# ===== 1. Build stage =====
-FROM node:20-alpine AS builder
-
+FROM node:20-alpine AS base
 WORKDIR /app
 
+# ───── deps stage ─────
+FROM base AS deps
 COPY package*.json ./
 RUN npm ci
 
+# ───── dev stage ─────
+FROM deps AS dev
 COPY . .
+EXPOSE ${PORT:-3000}
+CMD ["npm", "run", "dev"]
 
+# ───── build stage ─────
+FROM deps AS builder
+COPY . .
 RUN npm run build
 
-
-# ===== 2. Production stage =====
-FROM node:20-alpine AS runner
-
+# ───── prod stage ─────
+FROM node:20-alpine AS prod
 WORKDIR /app
-
 ENV NODE_ENV=production
 
 COPY package*.json ./
 RUN npm ci --omit=dev
 
-# important : NEXT needs these
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.* ./
 
-EXPOSE 3001
-
+EXPOSE ${PORT:-3001}
 CMD ["npm", "run", "start"]

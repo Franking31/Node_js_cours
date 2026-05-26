@@ -1,0 +1,25 @@
+services:
+  frontend:
+    build:
+      target: dev
+    container_name: quiz_app_frontend_dev
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+      - /app/.next
+
+  backend:
+    build:
+      target: dev
+    container_name: quiz_app_backend_dev
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./Backend:/app
+      - /app/node_modules
+
+  postgres:
+    ports:
+      - "${DB_PORT}:5432"
