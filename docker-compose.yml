@@ -9,7 +9,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=${FRONTEND_PORT}
-      - NEXT_PUBLIC_API_URL=http://backend:${API_PORT}
+      - NEXT_PUBLIC_API_URL=${API_PUBLIC_URL}
     ports:
       - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     networks:
@@ -29,6 +29,7 @@ services:
       - ./Backend/.env
     environment:
       - NODE_ENV=production
+      - PORT=${API_PORT}
     ports:
       - "${API_PORT}:${API_PORT}"
     networks:
