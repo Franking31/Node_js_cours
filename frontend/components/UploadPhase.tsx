@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { QuizConfig, QuestionType } from "@/lib/types";
 import styles from "../modules/UploadPhase.module.css";
+import CustomSelect from "./Customselect";
 
 interface Props {
   onGenerate: (config: QuizConfig) => void;
@@ -117,15 +118,19 @@ export default function UploadPhase({ onGenerate }: Props) {
     />
   </div>
   <div className={styles.field}>
-    <label>Niveau</label>
-    <select value={level} onChange={(e) => setLevel(e.target.value)}>
-      <option value="licence1">Licence 1</option>
-      <option value="licence2">Licence 2</option>
-      <option value="licence3">Licence 3</option>
-      <option value="master1">Master 1</option>
-      <option value="master2">Master 2</option>
-    </select>
-  </div>
+  <label>Niveau</label>
+  <CustomSelect
+    value={level}
+    onChange={setLevel}
+    options={[
+      { value: "licence1", label: "Licence 1" },
+      { value: "licence2", label: "Licence 2" },
+      { value: "licence3", label: "Licence 3" },
+      { value: "master1", label: "Master 1" },
+      { value: "master2", label: "Master 2" },
+    ]}
+  />
+</div>
 </div>
       <div className={styles.divider} />
       <p className={styles.phase}>Type de questions</p>
