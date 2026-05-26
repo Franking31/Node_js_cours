@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import styles from "../modules/CustomSelect.module.css";
+import styles from "../modules/Customselect.module.css";
 
 interface Option {
   value: string;
