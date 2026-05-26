@@ -75,5 +75,20 @@ router.post("/refresh", authController.refresh);
  */
 router.post("/logout", authMiddleware, authController.logout);
 
+/**
+ * @swagger
+ * /auth/me:
+ *   get:
+ *     summary: Récupérer les informations de l'utilisateur connecté
+ *     tags:
+ *       - Auth
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Informations de l'utilisateur récupérées avec succès
+ */
+router.get("/me", authMiddleware, authController.me );
+
 
 export default router;
