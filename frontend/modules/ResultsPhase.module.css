@@ -1,25 +1,327 @@
-.container { animation: fadeIn 0.3s ease; }
-.phase { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--txt2); margin-bottom: 0.75rem; }
-.hero { text-align: center; padding: 2rem 1rem; }
-.ring { width: 100px; height: 100px; border-radius: 50%; border: 4px solid var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
-.num { font-size: 30px; font-weight: 800; color: var(--accent); line-height: 1; }
-.den { font-size: 13px; color: var(--txt2); }
-.hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 0.5rem; }
-.hero p { font-size: 14px; color: var(--txt2); }
-.statsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.5rem 0; }
-.statCard { background: var(--bg2); border-radius: var(--radius-md); padding: 0.75rem 1rem; text-align: center; }
-.val { font-size: 22px; font-weight: 800; }
-.lbl { font-size: 11px; color: var(--txt2); margin-top: 2px; }
-.divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
-.reviewList { display: flex; flex-direction: column; gap: 8px; }
-.reviewItem { display: flex; align-items: flex-start; gap: 10px; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 0.5px solid var(--border); font-size: 13px; }
-.reviewItem i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-.reviewOk { border-color: var(--success); color: var(--success); }
-.reviewKo { border-color: var(--danger); }
-.reviewQ { font-weight: 500; line-height: 1.4; color: var(--txt); }
-.reviewAns { font-size: 12px; color: var(--txt2); margin-top: 4px; }
-.btnRow { display: flex; gap: 10px; justify-content: flex-end; margin-top: 1.5rem; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.65rem 1.25rem; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--border); background: var(--bg); color: var(--txt); }
-.btnPrimary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.btnPrimary:hover { opacity: 0.9; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* ── ResultsPhase.module.css ── */
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+  width: 100%;
+}
+
+.phase {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin: 0 0 1rem;
+}
+
+/* ── Hero score ── */
+.hero {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.ring {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+  width: clamp(5rem, 20vw, 7rem);
+  height: clamp(5rem, 20vw, 7rem);
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 1rem;
+}
+
+.num {
+  font-size: clamp(2rem, 7vw, 2.75rem);
+  font-weight: 800;
+  color: #c7d2fe;
+  line-height: 1;
+}
+
+.den {
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.hero h2 {
+  font-size: clamp(1.125rem, 4vw, 1.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ── Stats grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0.875rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.val {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.lbl {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 1.5rem 0 1.25rem;
+}
+
+/* ── Review list ── */
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.reviewItem {
+  display: flex;
+  gap: 0.875rem;
+  padding: clamp(0.875rem, 3vw, 1.25rem);
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  align-items: flex-start;
+}
+
+.reviewOk {
+  background: rgba(34, 197, 94, 0.06);
+  border-color: rgba(34, 197, 94, 0.15);
+}
+
+.reviewKo {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+.reviewOk > i {
+  color: #22c55e;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.reviewKo > i {
+  color: #ef4444;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.reviewContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.reviewQ {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+/* ── Review options ── */
+.reviewOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.reviewOption {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  min-height: 40px;
+  line-height: 1.4;
+}
+
+.reviewOptionCorrect {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.25);
+  color: #86efac;
+}
+
+.reviewOptionWrong {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.reviewLetter {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Open answer row ── */
+.openAnswerRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
+}
+
+.userAnswerBox,
+.correctAnswerBox {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.625rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.correctAnswerBox {
+  border-color: rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.answerLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.35);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.userAnswerBox p,
+.correctAnswerBox p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Explanation ── */
+.reviewExplanation {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.reviewExplanation i {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: #818cf8;
+}
+
+/* ── Button row ── */
+.btnRow {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 48px;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .statCard {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .openAnswerRow {
+    grid-template-columns: 1fr;
+  }
+
+  .btnRow {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reviewItem {
+    padding: 0.875rem;
+  }
+}

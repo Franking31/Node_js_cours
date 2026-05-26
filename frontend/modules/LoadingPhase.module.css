@@ -1,17 +1,74 @@
-.container { text-align: center; padding: 3rem 2rem; animation: fadeIn 0.3s ease; }
-.spinner {
-  width: 44px; height: 44px;
-  border: 3px solid var(--accent-light);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 1.25rem;
+/* ── LoadingPhase.module.css ── */
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  width: 100%;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
-.container h3 { font-size: 18px; font-weight: 700; margin-bottom: 0.4rem; }
-.container p { font-size: 13px; color: var(--txt2); }
-.stepList { list-style: none; max-width: 260px; margin: 1.5rem auto 0; display: flex; flex-direction: column; gap: 10px; text-align: left; }
-.step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--txt2); transition: color 0.3s; }
-.step i { font-size: 16px; }
-.step.done { color: var(--success); }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.spinner {
+  width: clamp(2.5rem, 10vw, 3.5rem);
+  height: clamp(2.5rem, 10vw, 3.5rem);
+  border: 3px solid rgba(99, 102, 241, 0.2);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.container h3 {
+  font-size: clamp(1.125rem, 4vw, 1.375rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.container p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 0.5rem;
+}
+
+.stepList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  text-align: left;
+  width: 100%;
+  max-width: 320px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.875rem;
+  transition: color 0.3s;
+}
+
+.step i {
+  font-size: 1.125rem;
+  flex-shrink: 0;
+}
+
+.step.done {
+  color: #86efac;
+}
+
+.step.done i {
+  color: #22c55e;
+}
