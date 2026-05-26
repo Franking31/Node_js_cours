@@ -5,6 +5,7 @@ RUN apk add --no-cache wget postgresql-client
 # ───── deps stage ─────
 FROM base AS deps
 COPY --chown=node:node package*.json ./
+COPY --chown=node:node prisma/ ./prisma/
 RUN npm ci
 
 # ───── dev stage ─────
