@@ -1,88 +1,149 @@
+/* ── QuizApp.module.css ── */
+
 .app {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
+  min-height: 100vh;
+  background: #0f1117;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
+/* ── Header ── */
 .header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 2rem;
+  gap: 1rem;
+  padding: 0.875rem clamp(1rem, 4vw, 2rem);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-wrap: wrap;
 }
 
 .logo {
-  width: 44px;
-  height: 44px;
-  background: var(--accent);
-  border-radius: 12px;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.125rem;
+  color: #fff;
   flex-shrink: 0;
 }
 
-.logo i {
-  color: #fff;
-  font-size: 22px;
+.header > div:nth-child(2) {
+  flex: 1;
+  min-width: 0;
 }
 
 .header h1 {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--txt);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header p {
-  font-size: 13px;
-  color: var(--txt2);
-  margin-top: 2px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.steps {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 2.5rem;
-}
-
-.step {
-  flex: 1;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--border);
-  transition: background 0.3s;
-}
-/* À AJOUTER dans ton QuizApp.module.css existant */
 
 .headerActions {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .navBtn {
   display: flex;
   align-items: center;
-  gap: .4rem;
-  padding: .45rem .9rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,.1);
-  background: transparent;
-  color: var(--text, #e8e8f0);
-  font-size: .82rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.875rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.625rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background .15s;
+  transition: all 0.2s;
   white-space: nowrap;
+  min-height: 36px;
 }
-.navBtn:hover { background: rgba(255,255,255,.08); }
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
 
 .navBtnDanger {
-  color: #f87171;
-  border-color: rgba(248,113,113,.25);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.2);
 }
-.navBtnDanger:hover { background: rgba(248,113,113,.1) !important; }
 
-.step.done { background: var(--accent); }
-.step.active { background: var(--accent); opacity: 0.45; }
+.navBtnDanger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* ── Progress steps ── */
+.steps {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.step {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.4s;
+  border-radius: 0 0 2px 2px;
+}
+
+.step.active {
+  background: #6366f1;
+}
+
+.step.done {
+  background: #22c55e;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .header {
+    gap: 0.625rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .header p {
+    display: none;
+  }
+
+  .navBtn span {
+    display: none;
+  }
+
+  .navBtn {
+    padding: 0.5rem;
+    font-size: 1rem;
+    min-width: 36px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .headerActions {
+    gap: 0.35rem;
+  }
+}
