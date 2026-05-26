@@ -8,6 +8,7 @@ RUN apk add --no-cache \
     postgresql-client
 
 COPY --chown=node:node package*.json ./
+COPY --chown=node:node prisma ./prisma 
 
 RUN npm ci
 
