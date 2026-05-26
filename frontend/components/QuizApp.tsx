@@ -10,8 +10,7 @@ import ResultsPhase from "./ResultsPhase";
 import DashboardPage from "./DashboardPage";
 import AdminPage from "./AdminPage";
 import styles from "../modules/QuizApp.module.css";
-
-const API = "http://localhost:3000";
+import { API } from "@/lib/config";
 
 type Phase = "login" | "register" | "upload" | "loading" | "submitting" | "quiz" | "results" | "dashboard" | "admin";
 

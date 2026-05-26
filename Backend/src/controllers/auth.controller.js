@@ -2,11 +2,12 @@
 import { env } from "../config/env.js";
 import { register as _register, login as _login, refresh as _refresh, me as _me } from "../services/auth.service.js";
 
-const isProd = env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
   httpOnly: true,
-  secure: false,
-  sameSite: "lax",
+  secure: isProd,        // true en prod (HTTPS), false en local
+  sameSite: isProd ? "none" : "lax",  // "none" requis pour cross-site en prod
 };
 
 async function register(req, res) {

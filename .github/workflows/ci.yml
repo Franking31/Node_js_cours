@@ -1,0 +1,43 @@
+# .github/workflows/ci.yml
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer les dépendances
+        run: npm install
+        working-directory: ./Backend
+
+      - name: Générer le client Prisma
+        run: npx prisma generate
+        working-directory: ./Backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # ← Ajouté ici
+
+      - name: Lancer les tests
+        run: npm test
+        working-directory: ./Backend
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GROQUERY_API_KEY: ${{ secrets.GROQUERY_API_KEY }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
