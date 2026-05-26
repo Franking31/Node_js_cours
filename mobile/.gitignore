@@ -1,0 +1,12 @@
+# Environnement
+.env
+
+# Tout le généré
+generated/
+
+# Android Studio
+*.iml
+.gradle/
+local.properties
+.idea/
+*.keystore

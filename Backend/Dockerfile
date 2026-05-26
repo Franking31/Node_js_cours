@@ -10,8 +10,8 @@ RUN npm ci
 
 # ───── dev stage ─────
 FROM deps AS dev
-COPY --chown=node:node prisma/ ./prisma/
 COPY --chown=node:node src/ ./src/
+COPY --chown=node:node prisma/ ./prisma/
 RUN npx prisma generate
 RUN mkdir -p /app/logs && chown -R node:node /app
 USER node
@@ -22,8 +22,8 @@ CMD ["sh", "-c", "npx prisma migrate deploy && npm run seed && npm run dev"]
 FROM base AS prod
 ENV NODE_ENV=production
 COPY --chown=node:node package*.json ./
-RUN npm ci --omit=dev
 COPY --chown=node:node prisma/ ./prisma/
+RUN npm ci --omit=dev
 COPY --chown=node:node src/ ./src/
 RUN npx prisma generate
 RUN mkdir -p /app/logs && chown -R node:node /app
