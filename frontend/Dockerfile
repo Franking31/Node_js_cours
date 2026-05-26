@@ -18,16 +18,9 @@ COPY . .
 RUN npm run build
 
 # ───── prod stage ─────
-FROM node:20-alpine AS prod
+FROM nginx:alpine AS prod
 WORKDIR /app
-ENV NODE_ENV=production
-
-COPY package*.json ./
-RUN npm ci --omit=dev
-
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.* ./
-
-EXPOSE ${PORT:-3001}
-CMD ["npm", "run", "start"]
+COPY --from=builder /app/out /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
