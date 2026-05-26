@@ -2,6 +2,7 @@
 import { useState, useEffect, Fragment } from "react";
 import { UserProfile } from "@/lib/types";
 import styles from "../modules/AdminPage.module.css";
+import { API } from "@/lib/config";
 
 interface Props {
   onBack: () => void;
@@ -25,7 +26,6 @@ export default function AdminPage({ onBack, onLogout }: Props) {
   useEffect(() => {
     fetchUsers();
   }, []);
-  const API = "http://localhost:3000"; 
   async function fetchUsers() {
     setLoading(true);
     try {
