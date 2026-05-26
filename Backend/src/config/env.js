@@ -7,6 +7,7 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string(),
   GROQUERY_API_KEY: z.string(),
   FRONTEND_URL: z.url(),
+  NODE_ENV: z.string().default('development')
 });
 
 export const env = envSchema.parse(process.env);

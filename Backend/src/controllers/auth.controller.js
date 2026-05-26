@@ -2,7 +2,7 @@
 import { env } from "../config/env.js";
 import { register as _register, login as _login, refresh as _refresh, me as _me } from "../services/auth.service.js";
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = env.NODE_ENV === "production";
 
 const cookieOptions = {
   httpOnly: true,
