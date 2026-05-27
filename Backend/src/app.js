@@ -10,11 +10,22 @@ import { env } from './config/env.js';
 
 const app = express();
 
-app.use(cors({ origin: env.FRONTEND_URL, credentials: true,
-    // ✅ Ajouter les méthodes et headers explicitement
+app.use(cors({ 
+  origin: (origin, callback) => {
+    const allowed = env.FRONTEND_URL.replace(/\/$/, ""); // retire slash final
+    const originClean = (origin ?? "").replace(/\/$/, "");
+    
+    if (!origin || originClean === allowed) {
+      callback(null, true);
+    } else {
+      console.error(`CORS bloqué: origin="${origin}" attendu="${allowed}"`);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
- }));
+}));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(compression());

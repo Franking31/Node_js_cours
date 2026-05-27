@@ -53,8 +53,8 @@ async function refresh(req, res) {
 }
 
 async function logout(req, res) {
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
+  res.clearCookie("accessToken", cookieOptions);
+  res.clearCookie("refreshToken", cookieOptions);
 
   res.json({ message: "Logged out" });
 }
