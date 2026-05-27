@@ -6,7 +6,7 @@ const envSchema = z.object({
   JWT_SECRET: z.string(),
   JWT_REFRESH_SECRET: z.string(),
   GROQUERY_API_KEY: z.string(),
-  FRONTEND_URL: z.url(),
+  FRONTEND_URL: z.string(),
   NODE_ENV: z.string().default('development')
 });
 
