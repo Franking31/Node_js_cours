@@ -25,7 +25,7 @@ jobs:
       # ─────────────────────────────────────────
       # 2. Configurer Node.js 20
       # ─────────────────────────────────────────
-      - name: Configuration Node.js 22
+      - name: Configuration Node.js 
         uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -35,10 +35,10 @@ jobs:
       # ─────────────────────────────────────────
       # 3. Configurer Java 17
       # ─────────────────────────────────────────
-      - name: Configuration Java 17
+      - name: Configuration Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
       # ─────────────────────────────────────────
