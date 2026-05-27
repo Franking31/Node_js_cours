@@ -9,19 +9,8 @@ import setupSwagger from './config/swagger.js'
 import { env } from './config/env.js';
 
 const app = express();
-
-app.use(cors({ 
-  origin: (origin, callback) => {
-    const allowed = env.FRONTEND_URL.replace(/\/$/, ""); // retire slash final
-    const originClean = (origin ?? "").replace(/\/$/, "");
-    
-    if (!origin || originClean === allowed) {
-      callback(null, true);
-    } else {
-      console.error(`CORS bloqué: origin="${origin}" attendu="${allowed}"`);
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+app.use(cors({
+  origin: env.FRONTEND_URL.split(',').map((url)=>url.trim()),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
