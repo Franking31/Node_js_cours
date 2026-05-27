@@ -1,0 +1,8 @@
+{
+    "appId": "com.keyce.quizai",
+    "appName": "QuizAI",
+    "webDir": "out",
+    "server": {
+        "androidScheme": "https"
+    }
+}

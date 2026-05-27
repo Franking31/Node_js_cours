@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.blader.quizapp',
-  appName: 'Quizapp',
+  appId: "com.keyce.quizai",
+  appName: "QuizAI",
   webDir: 'out',
   server: {
     "androidScheme":"https"
