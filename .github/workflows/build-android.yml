@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
 
       # ─────────────────────────────────────────
-      # 2. Configurer Node.js 20
+      # 2. Configurer Node.js 22
       # ─────────────────────────────────────────
       - name: Configuration Node.js 
         uses: actions/setup-node@v4
@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       # ─────────────────────────────────────────
-      # 3. Configurer Java 17
+      # 3. Configurer Java 21
       # ─────────────────────────────────────────
       - name: Configuration Java
         uses: actions/setup-java@v4
@@ -60,7 +60,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('mobile/generated/source/android/**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('generated/source/android/**/gradle-wrapper.properties') }}
           restore-keys: |
             gradle-${{ runner.os }}-
 
@@ -88,7 +88,7 @@ jobs:
       - name: Initialisation Capacitor Android
         working-directory: frontend
         run: |
-          if [ ! -d "../mobile/generated/source/android" ]; then
+          if [ ! -d "generated/source/android" ]; then
             npx cap add android
           fi 
           npx cap sync android
@@ -97,14 +97,14 @@ jobs:
       # 9. Rendre Gradle exécutable
       # ─────────────────────────────────────────
       - name: Permissions Gradle
-        working-directory: mobile/generated/source/android
+        working-directory: generated/source/android
         run: chmod +x gradlew
 
       # ─────────────────────────────────────────
       # 10. Compiler l'APK
       # ─────────────────────────────────────────
       - name: Compilation APK Debug
-        working-directory: mobile/generated/source/android
+        working-directory: generated/source/android
         run: |
           ./gradlew assembleDebug \
             --no-daemon \
@@ -117,7 +117,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-${{ github.sha }}
-          path: mobile/generated/source/android/app/build/outputs/apk/debug/app-debug.apk
+          path: generated/source/android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
       # ─────────────────────────────────────────
@@ -125,7 +125,7 @@ jobs:
       # ─────────────────────────────────────────
       - name: Résumé du build
         run: |
-          APK_PATH="mobile/generated/source/android/app/build/outputs/apk/debug/app-debug.apk"
+          APK_PATH="generated/source/android/app/build/outputs/apk/debug/app-debug.apk"
           APK_SIZE=$(du -sh "$APK_PATH" | cut -f1)
           echo "## ✅ Build Android réussi" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
