@@ -2,7 +2,12 @@ import { verifyAccess } from "../config/jwt.js";
 
 function authMiddleware(req, res, next) {
   try {
-    // Lit le cookie OU le header Authorization: Bearer <token>
+    console.log("=== AUTH DEBUG ===");
+    console.log("cookies:", req.cookies);
+    console.log("authorization header:", req.headers.authorization);
+    console.log("origin:", req.headers.origin);
+    console.log("=================");
+
     const token = req.cookies.accessToken 
       ?? req.headers.authorization?.split(" ")[1];
 
