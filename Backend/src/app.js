@@ -13,7 +13,7 @@ app.use(cors({
   origin: (origin, callback) => {
     const allowed = env.FRONTEND_URL.split(',').map((url)=>url.trim())
     
-    if (!origin || allowedOrigins.includes(originClean)) {
+    if (!origin || allowed.includes(origin)) {
       callback(null, true);
     } else {
       console.error(`CORS bloqué: origin="${origin}"`);

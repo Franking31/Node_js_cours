@@ -9,6 +9,8 @@ services:
       - ../generated:/workspace/generated
       - android-npm-cache:/root/.npm
       - android-gradle-cache:/root/.gradle
+    env_file:
+      - ../.env
     environment:
       - APP_NAME=${APP_NAME:-QuizAI}
       - APP_ID=${APP_ID:-com.keyce.quizai}
