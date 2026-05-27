@@ -1,7 +1,7 @@
-import { Question, QuizConfig } from "./types";
+import { QuizQuestion as Question, QuizConfig } from "./types";
 
 export async function generateQuiz(config: QuizConfig): Promise<Question[]> {
-  const { courseText, subject, level, questionCount, selectedTypes } = config;
+  const { content: courseText, subject, level, questionCount, selectedTypes } = config;
 
   const typesLabel = selectedTypes
     .map((t) => (t === "qcm" ? "QCM" : t === "vf" ? "Vrai/Faux" : "Question ouverte"))
