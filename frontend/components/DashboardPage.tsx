@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { UserProfile, QuizHistoryItem, QuestionType } from "@/lib/types";
 import styles from "../modules/DashboardPage.module.css";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
 import { API } from "@/lib/config";
 
 interface Props {
@@ -35,10 +36,10 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
     if (tab === "history") fetchHistory();
   }, [tab]);
 
-  async function fetchHistory() {
+    async function fetchHistory() {
     setHistoryLoading(true);
     try {
-      const res = await fetch(`${API}/api/quiz/me`, { credentials: "include" });
+      const res = await fetchWithAuth(`${API}/api/quiz/me`);
       const data = await res.json();
       if (res.ok) setHistory(data);
     } catch (e) {
@@ -48,18 +49,16 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
     }
   }
 
-  /* ── Sauvegarder le profil ── */
-  async function handleSave() {
+    /* ── Sauvegarder le profil ── */
+    async function handleSave() {
     setProfileLoading(true);
     setProfileMsg(null);
     try {
       const body: any = { name, email };
       if (newPassword.trim()) body.password = newPassword;
 
-      const res = await fetch(`${API}/api/user/me`, {
+      const res = await fetchWithAuth(`${API}/api/user/me`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(body),
       });
       const data = await res.json();
@@ -74,14 +73,12 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
     }
   }
 
-  /* ── Supprimer le compte ── */
-  async function handleDeleteAccount() {
+    /* ── Supprimer le compte ── */
+    async function handleDeleteAccount() {
     try {
-      const res = await fetch(`${API}/api/user/me`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      const res = await fetchWithAuth(`${API}/api/user/me`, { method: "DELETE" });
       if (!res.ok) throw new Error("Erreur lors de la suppression");
+      localStorage.removeItem("accessToken");
       onLogout();
     } catch (e: any) {
       setProfileMsg({ type: "err", text: e.message });
@@ -90,18 +87,15 @@ export default function DashboardPage({ user, onUserUpdate, onBack, onLogout }: 
 
   /* ── Supprimer un quiz de l'historique ── */
   async function handleDeleteQuiz(quizId: string) {
-    try {
-      const res = await fetch(`${API}/api/quiz/${quizId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error();
-      setHistory((h) => h.filter((q) => q.id !== quizId));
-      if (selectedQuiz?.id === quizId) setSelectedQuiz(null);
-    } catch {
-      alert("Erreur lors de la suppression du quiz.");
-    }
+  try {
+    const res = await fetchWithAuth(`${API}/api/quiz/${quizId}`, { method: "DELETE" });
+    if (!res.ok) throw new Error();
+    setHistory((h) => h.filter((q) => q.id !== quizId));
+    if (selectedQuiz?.id === quizId) setSelectedQuiz(null);
+  } catch {
+    alert("Erreur lors de la suppression du quiz.");
   }
+}
 
   const typeLabel = (t: QuestionType) =>
     t === "qcm" ? "QCM" : t === "vf" ? "Vrai/Faux" : "Ouvert";

@@ -11,6 +11,7 @@ import DashboardPage from "./DashboardPage";
 import AdminPage from "./AdminPage";
 import styles from "../modules/QuizApp.module.css";
 import { API } from "@/lib/config";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
 
 type Phase = "login" | "register" | "upload" | "loading" | "submitting" | "quiz" | "results" | "dashboard" | "admin";
 
@@ -30,17 +31,18 @@ export default function QuizApp() {
 
  async function checkAuth() {
   try {
-    let res = await fetch(`${API}/api/auth/me`, { credentials: "include" });
+    let res = await fetchWithAuth(`${API}/api/auth/me`);
 
     if (!res.ok) {
-      // Tentative de refresh
-      const refreshRes = await fetch(`${API}/api/auth/refresh`, {
+      const refreshRes = await fetchWithAuth(`${API}/api/auth/refresh`, {
         method: "POST",
-        credentials: "include",
       });
-
       if (refreshRes.ok) {
-        res = await fetch(`${API}/api/auth/me`, { credentials: "include" });
+        const refreshData = await refreshRes.json();
+        if (refreshData.accessToken) {
+          localStorage.setItem("accessToken", refreshData.accessToken);
+        }
+        res = await fetchWithAuth(`${API}/api/auth/me`);
       }
     }
 
@@ -68,11 +70,14 @@ export default function QuizApp() {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || "Erreur de connexion");
+
+    if (data.accessToken) localStorage.setItem("accessToken", data.accessToken);
+
     setUser(data.user);
     setPhase("upload");
   }
 
-  async function handleRegister(name: string, email: string, password: string) {
+    async function handleRegister(name: string, email: string, password: string) {
     const res = await fetch(`${API}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -81,12 +86,16 @@ export default function QuizApp() {
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || "Erreur d'inscription");
+
+    if (data.accessToken) localStorage.setItem("accessToken", data.accessToken);
+
     setUser(data.user);
     setPhase("upload");
   }
 
-  async function handleLogout() {
-    await fetch(`${API}/api/auth/logout`, { method: "POST", credentials: "include" });
+    async function handleLogout() {
+    await fetchWithAuth(`${API}/api/auth/logout`, { method: "POST" });
+    localStorage.removeItem("accessToken");
     setUser(null);
     setQuestions([]);
     setQuizId(null);
@@ -95,13 +104,11 @@ export default function QuizApp() {
   }
 
   /* ── Génération du quiz ── */
-  async function handleGenerate(config: QuizConfig) {
+    async function handleGenerate(config: QuizConfig) {
     setPhase("loading");
     try {
-      const res = await fetch(`${API}/api/quiz/generate`, {
+      const res = await fetchWithAuth(`${API}/api/quiz/generate`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           course: {
             title: config.title,
@@ -118,8 +125,6 @@ export default function QuizApp() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Erreur de génération");
 
-      // Le backend renvoie { id, questions: [...] }
-      // Les questions n'ont PAS de champ answer/explanation
       setQuizId(data.id);
       setQuestions(
         (data.questions as any[]).map((q) => ({
@@ -134,7 +139,7 @@ export default function QuizApp() {
       setPhase("quiz");
     } catch (e: any) {
       console.error(e);
-      alert(e.message || "Erreur de génération. Vérifie que ton cours contient suffisamment de contenu.");
+      alert(e.message || "Erreur de génération.");
       setPhase("upload");
     }
   }
@@ -144,17 +149,13 @@ export default function QuizApp() {
   if (!quizId) return;
   setPhase("submitting");
   try {
-    const res = await fetch(`${API}/api/quiz/${quizId}/submit`, {
+    const res = await fetchWithAuth(`${API}/api/quiz/${quizId}/submit`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
       body: JSON.stringify({ answers }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || "Erreur lors de la correction");
 
-    // Le backend renvoie le quiz complet avec questions[] + answers[]
-    // On reconstruit la structure SubmitResponse attendue par ResultsPhase
     const qs: any[] = data.questions ?? [];
     const ans: any[] = data.answers ?? [];
     const total = data.questionCount ?? qs.length;
@@ -174,7 +175,6 @@ export default function QuizApp() {
     });
 
     const correctCount = results.filter((r) => r.isCorrect).length;
-
     setSubmitResponse({
       score: correctCount,
       total,

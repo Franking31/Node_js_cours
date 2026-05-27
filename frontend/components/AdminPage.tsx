@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, Fragment } from "react";
 import { UserProfile } from "@/lib/types";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
 import styles from "../modules/AdminPage.module.css";
 import { API } from "@/lib/config";
 
@@ -27,41 +28,39 @@ export default function AdminPage({ onBack, onLogout }: Props) {
     fetchUsers();
   }, []);
   async function fetchUsers() {
-    setLoading(true);
-    try {
-      const res = await fetch(`${API}/api/admin/users`, { credentials: "include" });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      setUsers(data);
-    } catch (e: any) {
-      setErrorMsg(e.message || "Erreur lors du chargement des utilisateurs");
-    } finally {
-      setLoading(false);
-    }
+  setLoading(true);
+  try {
+    const res = await fetchWithAuth(`${API}/api/admin/users`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
+    setUsers(data);
+  } catch (e: any) {
+    setErrorMsg(e.message || "Erreur lors du chargement des utilisateurs");
+  } finally {
+    setLoading(false);
   }
+}
 
   async function handleDelete(userId: string, userName: string) {
-    setDeletingId(userId);
-    setSuccessMsg(null);
-    setErrorMsg(null);
-    try {
-      const res = await fetch(`${API}/api/admin/users/${userId}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message);
-      setUsers((prev) => prev.filter((u) => u.id !== userId));
-      setSuccessMsg(`L'utilisateur "${userName}" a été supprimé avec succès.`);
-      setConfirmId(null);
-      // Auto-clear après 4s
-      setTimeout(() => setSuccessMsg(null), 4000);
-    } catch (e: any) {
-      setErrorMsg(e.message || "Erreur lors de la suppression");
-    } finally {
-      setDeletingId(null);
-    }
+  setDeletingId(userId);
+  setSuccessMsg(null);
+  setErrorMsg(null);
+  try {
+    const res = await fetchWithAuth(`${API}/api/admin/users/${userId}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message);
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
+    setSuccessMsg(`L'utilisateur "${userName}" a été supprimé avec succès.`);
+    setConfirmId(null);
+    setTimeout(() => setSuccessMsg(null), 4000);
+  } catch (e: any) {
+    setErrorMsg(e.message || "Erreur lors de la suppression");
+  } finally {
+    setDeletingId(null);
   }
+}
 
   const filtered = users.filter(
     (u) =>
