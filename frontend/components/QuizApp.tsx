@@ -10,7 +10,7 @@ import ResultsPhase from "./ResultsPhase";
 import DashboardPage from "./DashboardPage";
 import AdminPage from "./AdminPage";
 import styles from "../modules/QuizApp.module.css";
-import landingStyles from "../modules/LandingPage.module.css";
+import landingStyles from "../modules/Landingpage.module.css";
 import { API } from "@/lib/config";
 import { fetchWithAuth } from "@/lib/fetchWithAuth";
 
