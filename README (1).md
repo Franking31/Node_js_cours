@@ -455,6 +455,6 @@ Déclenché sur push vers `main` / `develop` ou manuellement :
 |---|---|
 | Frontend (Vercel) | https://node-js-cours-vuxo.vercel.app/ |
 | Backend | https://backend-quizz-g9az.onrender.com |
-| Swagger (prod) |  |
+| Swagger (prod) | https://backend-quizz-g9az.onrender.com/Docs |
 
 Le backend peut être déployé sur Railway, Render, ou tout VPS avec Docker. La base PostgreSQL doit être accessible via `DATABASE_URL`.
