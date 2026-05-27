@@ -76,21 +76,21 @@ Node_js_cours/
 │   │   │   └── data.json
 │   │   └── migrations/
 │   ├── src/
-│   │   ├── app.js                      # Express + middlewares globaux
-│   │   ├── server.js                   # Point d'entrée, écoute HTTP
+│   │   ├── app.js                      
+│   │   ├── server.js                   
 │   │   ├── config/
-│   │   │   ├── env.js                  # Validation des variables d'env (Zod)
-│   │   │   ├── jwt.js                  # Sign / verify tokens
-│   │   │   ├── prisma.js               # Instance Prisma Client
-│   │   │   └── swagger.js              # Configuration Swagger UI
+│   │   │   ├── env.js                  
+│   │   │   ├── jwt.js                  
+│   │   │   ├── prisma.js               
+│   │   │   └── swagger.js              
 │   │   ├── controllers/
 │   │   │   ├── admin.controller.js
 │   │   │   ├── auth.controller.js
 │   │   │   └── quiz.controller.js
 │   │   ├── middlewares/
-│   │   │   ├── auth.middleware.js      # Vérification JWT (cookie ou header)
-│   │   │   ├── role.middleware.js      # Contrôle d'accès par rôle
-│   │   │   └── validate.middleware.js  # Validation Zod des requêtes
+│   │   │   ├── auth.middleware.js      
+│   │   │   ├── role.middleware.js      
+│   │   │   └── validate.middleware.js  
 │   │   ├── repositories/
 │   │   │   ├── answer.repository.js
 │   │   │   ├── auth.repository.js
@@ -103,7 +103,7 @@ Node_js_cours/
 │   │   │   └── quiz.routes.js
 │   │   ├── services/
 │   │   │   ├── auth.service.js
-│   │   │   ├── grok.service.js         # Intégration Groq API
+│   │   │   ├── grok.service.js         
 │   │   │   ├── quiz.service.js
 │   │   │   └── user.service.js
 │   │   └── validators/
@@ -113,7 +113,7 @@ Node_js_cours/
 │   │   ├── unit/
 │   │   ├── integration/
 │   │   ├── e2e/
-│   │   ├── features/                   # Scénarios BDD Cucumber
+│   │   ├── features/                   
 │   │   └── setup/
 │   ├── .env
 │   ├── .env.example
@@ -135,10 +135,10 @@ Node_js_cours/
 │   │   ├── LoadingPhase.tsx
 │   │   └── ResultsPhase.tsx
 │   ├── lib/
-│   │   ├── config.ts                   # Configuration (URL API, etc.)
-│   │   ├── fetchWithAuth.ts            # Fetch avec gestion des tokens
-│   │   └── types.ts                    # Types TypeScript partagés
-│   ├── modules/                        # CSS Modules par composant
+│   │   ├── config.ts                   
+│   │   ├── fetchWithAuth.ts            
+│   │   └── types.ts                    
+│   ├── modules/                        
 │   │   ├── AdminPage.module.css
 │   │   ├── Customselect.module.css
 │   │   ├── DashboardPage.module.css
