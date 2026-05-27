@@ -21,7 +21,10 @@ npm run build
 log_ok "Build Next.js terminé"
 
 log_step "Ajout de la plateforme Android..."
-[ -d "android" ] && log_warn "Ancien android/ détecté, suppression..." && rm -rf android
+if [ -d "/workspace/generated/source/android" ]; then
+  log_warn "Android déjà présent, suppression..."
+  rm -rf /workspace/generated/source/android
+fi
 npx cap add android
 log_ok "Plateforme Android ajoutée"
 
@@ -30,7 +33,7 @@ npx cap sync android
 log_ok "Synchronisation terminée"
 
 log_step "Compilation de l'APK Android..."
-cd /workspace/app/android
+cd /workspace/generated/source/android
 chmod +x gradlew
 ./gradlew assembleDebug \
   --no-daemon \
@@ -39,7 +42,7 @@ chmod +x gradlew
 log_ok "Compilation terminée"
 
 log_step "Déplacement de l'APK..."
-APK_SOURCE="/workspace/app/android/app/build/outputs/apk/debug/app-debug.apk"
+APK_SOURCE="/workspace/generated/source/android/app/build/outputs/apk/debug/app-debug.apk"
 APK_DEST="/workspace/generated/builds/apk"
 mkdir -p "$APK_DEST"
 cp "$APK_SOURCE" "$APK_DEST/app-debug.apk"
