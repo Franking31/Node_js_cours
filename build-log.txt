@@ -1,0 +1,435 @@
+
+══════════════════════════════════
+  BUILD ANDROID — Docker local   
+══════════════════════════════════
+
+✓ Docker est actif
+✓ Variables .env chargées
+
+▶ Lancement du build Docker...
+
+time="2026-05-27T04:37:41+02:00" level=warning msg="/mnt/c/Cours master france/next.js/Node_js_cours/docker/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image docker-android-builder Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 589B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.11kB 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/ubuntu:22.04
+#3 ...
+
+#4 [auth] library/ubuntu:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/ubuntu:22.04
+#3 DONE 0.9s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 2B 0.1s done
+#5 DONE 0.1s
+
+#6 [1/8] FROM docker.io/library/ubuntu:22.04@sha256:4f838adc7181d9039ac795a7d0aba05a9bd9ecd480d294483169c5def983b64d
+#6 resolve docker.io/library/ubuntu:22.04@sha256:4f838adc7181d9039ac795a7d0aba05a9bd9ecd480d294483169c5def983b64d 0.1s done
+#6 DONE 0.1s
+
+#7 [internal] load build context
+#7 transferring context: 77B 0.2s done
+#7 DONE 0.2s
+
+#8 [5/8] RUN yes | sdkmanager --licenses &&   sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+#8 CACHED
+
+#9 [6/8] WORKDIR /workspace
+#9 CACHED
+
+#10 [7/8] COPY scripts/docker-entrypoint.sh /docker-entrypoint.sh
+#10 CACHED
+
+#11 [4/8] RUN mkdir -p /opt/android-sdk/cmdline-tools &&   wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip   -O /tmp/cmdline-tools.zip &&   unzip -q /tmp/cmdline-tools.zip -d /tmp &&   mv /tmp/cmdline-tools /opt/android-sdk/cmdline-tools/latest &&   rm /tmp/cmdline-tools.zip
+#11 CACHED
+
+#12 [2/8] RUN apt-get update && apt-get install -y   curl wget unzip git openjdk-17-jdk   && rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#13 [3/8] RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -   && apt-get install -y nodejs   && rm -rf /var/lib/apt/lists/*
+#13 CACHED
+
+#14 [8/8] RUN chmod +x /docker-entrypoint.sh
+#14 CACHED
+
+#15 exporting to image
+#15 exporting layers done
+#15 exporting manifest sha256:0a9a78d8b621cc378045ec31bb9b67d5f6d780a89361da0b1b4969718775700b done
+#15 exporting config sha256:02a3e8c9875c794ba0a5e40bbe240705ba1f7e688fae382ac48c548676e064af done
+#15 exporting attestation manifest sha256:e29ad219c6a13e64ceb5012272b17c7db2ef47207df5f61f3c444cec90869660 0.1s done
+#15 exporting manifest list sha256:aa9d9e9323e3614c3cb83413b5f558c4252a6ba6c8c2d56c2ae180de45ef2f02
+#15 exporting manifest list sha256:aa9d9e9323e3614c3cb83413b5f558c4252a6ba6c8c2d56c2ae180de45ef2f02 0.0s done
+#15 naming to docker.io/library/docker-android-builder:latest 0.1s done
+#15 unpacking to docker.io/library/docker-android-builder:latest 0.0s done
+#15 DONE 0.3s
+
+#16 resolving provenance for metadata file
+#16 DONE 0.1s
+ Image docker-android-builder Built 
+ Container docker-android-builder-1 Recreate 
+ Container docker-android-builder-1 Recreated 
+Attaching to android-builder-1
+ Container docker-android-builder-1 Starting 
+android-builder-1  | 
+android-builder-1  | [0;34m▶ Installation des dépendances Node.js...[0m
+ Container docker-android-builder-1 Started 
+android-builder-1  | 
+android-builder-1  | added 444 packages, and audited 445 packages in 5m
+android-builder-1  | 
+android-builder-1  | 155 packages are looking for funding
+android-builder-1  |   run `npm fund` for details
+android-builder-1  | 
+android-builder-1  | 2 moderate severity vulnerabilities
+android-builder-1  | 
+android-builder-1  | To address all issues (including breaking changes), run:
+android-builder-1  |   npm audit fix --force
+android-builder-1  | 
+android-builder-1  | Run `npm audit` for details.
+android-builder-1  | [0;32m✓ Dépendances installées[0m
+android-builder-1  | 
+android-builder-1  | [0;34m▶ Build Next.js en mode export statique...[0m
+android-builder-1  | 
+android-builder-1  | > frontend@0.1.0 build
+android-builder-1  | > next build
+android-builder-1  | 
+android-builder-1  | ▲ Next.js 16.2.6 (Turbopack)
+android-builder-1  | 
+android-builder-1  |   Creating an optimized production build ...
+android-builder-1  | ✓ Compiled successfully in 12.1s
+android-builder-1  |   Running TypeScript ...
+android-builder-1  |   Finished TypeScript in 13.0s ...
+android-builder-1  |   Collecting page data using 1 worker ...
+android-builder-1  |   Generating static pages using 1 worker (0/4) ...
+android-builder-1  |   Generating static pages using 1 worker (1/4) 
+android-builder-1  |   Generating static pages using 1 worker (2/4) 
+android-builder-1  |   Generating static pages using 1 worker (3/4) 
+android-builder-1  | ✓ Generating static pages using 1 worker (4/4) in 3.6s
+android-builder-1  |   Finalizing page optimization ...
+android-builder-1  | 
+android-builder-1  | Route (app)
+android-builder-1  | ┌ ○ /
+android-builder-1  | └ ○ /_not-found
+android-builder-1  | 
+android-builder-1  | 
+android-builder-1  | ○  (Static)  prerendered as static content
+android-builder-1  | 
+android-builder-1  | [0;32m✓ Build Next.js terminé[0m
+android-builder-1  | 
+android-builder-1  | [0;34m▶ Ajout de la plateforme Android...[0m
+android-builder-1  | [1;33m⚠ Ancien android/ détecté, suppression...[0m
+android-builder-1  | ✔ Adding native android project in android in 807.71ms
+android-builder-1  | ✔ add in 808.49ms
+android-builder-1  | ✔ Copying web assets from out to android/app/src/main/assets/public in 576.59ms
+android-builder-1  | ✔ Creating capacitor.config.json in android/app/src/main/assets in 5.06ms
+android-builder-1  | ✔ copy android in 811.31ms
+android-builder-1  | ✔ Updating Android plugins in 65.26ms
+android-builder-1  | ✔ update android in 1.29s
+android-builder-1  | ✔ Syncing Gradle in 329.63μs
+android-builder-1  | [success] android platform added!
+android-builder-1  | Follow the Developer Workflow guide to get building:
+android-builder-1  | https://capacitorjs.com/docs/basics/workflow
+android-builder-1  | [0;32m✓ Plateforme Android ajoutée[0m
+android-builder-1  | 
+android-builder-1  | [0;34m▶ Synchronisation des assets web vers Android...[0m
+android-builder-1  | ✔ Copying web assets from out to android/app/src/main/assets/public in 2.51s
+android-builder-1  | ✔ Creating capacitor.config.json in android/app/src/main/assets in 5.29ms
+android-builder-1  | ✔ copy android in 2.74s
+android-builder-1  | ✔ Updating Android plugins in 48.04ms
+android-builder-1  | ✔ update android in 351.21ms
+android-builder-1  | [info] Sync finished in 3.333s
+android-builder-1  | [0;32m✓ Synchronisation terminée[0m
+android-builder-1  | 
+android-builder-1  | [0;34m▶ Compilation de l'APK Android...[0m
+android-builder-1  | To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+android-builder-1  | Daemon will be stopped at the end of the build 
+android-builder-1  | 
+android-builder-1  | > Configure project :app
+android-builder-1  | WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+android-builder-1  | 
+android-builder-1  | > Configure project :capacitor-cordova-android-plugins
+android-builder-1  | WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+android-builder-1  | Checking the license for package Android SDK Build-Tools 35 in /opt/android-sdk/licenses
+android-builder-1  | License for package Android SDK Build-Tools 35 accepted.
+android-builder-1  | Preparing "Install Android SDK Build-Tools 35 v.35.0.0".
+android-builder-1  | "Install Android SDK Build-Tools 35 v.35.0.0" ready.
+android-builder-1  | Installing Android SDK Build-Tools 35 in /opt/android-sdk/build-tools/35.0.0
+android-builder-1  | "Install Android SDK Build-Tools 35 v.35.0.0" complete.
+android-builder-1  | "Install Android SDK Build-Tools 35 v.35.0.0" finished.
+android-builder-1  | Checking the license for package Android SDK Platform 36 in /opt/android-sdk/licenses
+android-builder-1  | License for package Android SDK Platform 36 accepted.
+android-builder-1  | Preparing "Install Android SDK Platform 36 (revision 2)".
+android-builder-1  | "Install Android SDK Platform 36 (revision 2)" ready.
+android-builder-1  | Installing Android SDK Platform 36 in /opt/android-sdk/platforms/android-36
+android-builder-1  | "Install Android SDK Platform 36 (revision 2)" complete.
+android-builder-1  | "Install Android SDK Platform 36 (revision 2)" finished.
+android-builder-1  | [=========                              ] 25%                                   
+android-builder-1  | > Task :app:preBuild UP-TO-DATE
+android-builder-1  | > Task :app:preDebugBuild UP-TO-DATE
+android-builder-1  | > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+android-builder-1  | > Task :capacitor-android:preBuild UP-TO-DATE
+android-builder-1  | > Task :capacitor-android:preDebugBuild UP-TO-DATE
+android-builder-1  | > Task :app:javaPreCompileDebug
+android-builder-1  | > Task :capacitor-cordova-android-plugins:preBuild UP-TO-DATE
+android-builder-1  | > Task :capacitor-cordova-android-plugins:preDebugBuild UP-TO-DATE
+android-builder-1  | > Task :capacitor-android:writeDebugAarMetadata
+android-builder-1  | > Task :capacitor-cordova-android-plugins:writeDebugAarMetadata
+android-builder-1  | > Task :capacitor-android:processDebugNavigationResources
+android-builder-1  | > Task :app:checkDebugAarMetadata
+android-builder-1  | > Task :capacitor-cordova-android-plugins:processDebugNavigationResources
+android-builder-1  | > Task :app:processDebugNavigationResources
+android-builder-1  | > Task :app:compileDebugNavigationResources
+android-builder-1  | > Task :app:generateDebugResValues
+android-builder-1  | > Task :capacitor-android:generateDebugResValues
+android-builder-1  | > Task :capacitor-android:generateDebugResources
+android-builder-1  | > Task :capacitor-android:packageDebugResources
+android-builder-1  | > Task :capacitor-cordova-android-plugins:generateDebugResValues
+android-builder-1  | > Task :capacitor-cordova-android-plugins:generateDebugResources
+android-builder-1  | > Task :capacitor-cordova-android-plugins:packageDebugResources
+android-builder-1  | > Task :app:mapDebugSourceSetPaths
+android-builder-1  | > Task :app:generateDebugResources
+android-builder-1  | > Task :app:createDebugCompatibleScreenManifests
+android-builder-1  | > Task :app:extractDeepLinksDebug
+android-builder-1  | > Task :capacitor-android:extractDeepLinksDebug
+android-builder-1  | > Task :capacitor-android:processDebugManifest
+android-builder-1  | > Task :capacitor-cordova-android-plugins:extractDeepLinksDebug
+android-builder-1  | > Task :capacitor-cordova-android-plugins:processDebugManifest
+android-builder-1  | > Task :app:mergeDebugResources
+android-builder-1  | > Task :app:processDebugMainManifest
+android-builder-1  | > Task :app:packageDebugResources
+android-builder-1  | > Task :app:processDebugManifest
+android-builder-1  | > Task :app:processDebugManifestForPackage
+android-builder-1  | > Task :app:parseDebugLocalResources
+android-builder-1  | > Task :capacitor-android:compileDebugLibraryResources
+android-builder-1  | > Task :capacitor-android:parseDebugLocalResources
+android-builder-1  | > Task :capacitor-cordova-android-plugins:compileDebugLibraryResources
+android-builder-1  | > Task :capacitor-android:generateDebugRFile
+android-builder-1  | > Task :capacitor-cordova-android-plugins:parseDebugLocalResources
+android-builder-1  | > Task :capacitor-android:javaPreCompileDebug
+android-builder-1  | > Task :capacitor-cordova-android-plugins:generateDebugRFile
+android-builder-1  | > Task :capacitor-android:compileDebugJavaWithJavac FAILED
+android-builder-1  | 
+android-builder-1  | [Incubating] Problems report is available at: file:///workspace/app/android/build/reports/problems/problems-report.html
+android-builder-1  | 
+android-builder-1  | FAILURE: Build failed with an exception.
+android-builder-1  | 
+android-builder-1  | * What went wrong:
+android-builder-1  | Execution failed for task ':capacitor-android:compileDebugJavaWithJavac'.
+android-builder-1  | > Java compilation initialization error
+android-builder-1  |     error: invalid source release: 21
+android-builder-1  | 
+android-builder-1  | * Try:
+android-builder-1  | > Run with --info or --debug option to get more log output.
+android-builder-1  | > Run with --scan to get full insights.
+android-builder-1  | > Get more help at https://help.gradle.org.
+android-builder-1  | 
+android-builder-1  | * Exception is:
+android-builder-1  | org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':capacitor-android:compileDebugJavaWithJavac'.
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
+android-builder-1  | 	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:293)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+android-builder-1  | 	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+android-builder-1  | 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+android-builder-1  | 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+android-builder-1  | 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+android-builder-1  | 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+android-builder-1  | 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+android-builder-1  | Caused by: java.lang.IllegalArgumentException: error: invalid source release: 21
+android-builder-1  | 	at jdk.compiler/com.sun.tools.javac.main.Arguments.error(Arguments.java:905)
+android-builder-1  | 	at jdk.compiler/com.sun.tools.javac.main.Arguments.doProcessArgs(Arguments.java:383)
+android-builder-1  | 	at jdk.compiler/com.sun.tools.javac.main.Arguments.processArgs(Arguments.java:347)
+android-builder-1  | 	at jdk.compiler/com.sun.tools.javac.main.Arguments.init(Arguments.java:246)
+android-builder-1  | 	at jdk.compiler/com.sun.tools.javac.api.JavacTool.getTask(JavacTool.java:191)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.JdkTools$DefaultIncrementalAwareCompiler.getTask(JdkTools.java:99)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.createCompileTask(JdkJavaCompiler.java:113)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:76)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:50)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+android-builder-1  | 	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+android-builder-1  | 	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$3(JavaCompile.java:206)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.CleaningJavaCompiler.execute(CleaningJavaCompiler.java:53)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.incremental.IncrementalCompilerFactory.lambda$createRebuildAllCompiler$0(IncrementalCompilerFactory.java:55)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:70)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$1.call(CompileJavaBuildOperationReportingCompiler.java:64)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$1.call(CompileJavaBuildOperationReportingCompiler.java:48)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+android-builder-1  | 	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:48)
+android-builder-1  | 	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:224)
+android-builder-1  | 	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:165)
+android-builder-1  | 	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:150)
+android-builder-1  | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+android-builder-1  | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+android-builder-1  | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+android-builder-1  | 	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+android-builder-1  | 	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+android-builder-1  | 	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+android-builder-1  | 	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+android-builder-1  | 	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:229)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:212)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:195)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:162)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:105)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:44)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:59)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:56)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:56)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:44)
+android-builder-1  | 	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+android-builder-1  | 	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+android-builder-1  | 	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+android-builder-1  | 	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:50)
+android-builder-1  | 	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:28)
+android-builder-1  | 	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:67)
+android-builder-1  | 	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:37)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:61)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:26)
+android-builder-1  | 	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+android-builder-1  | 	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
+android-builder-1  | 	at org.gradle.internal.Either$Right.fold(Either.java:175)
+android-builder-1  | 	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
+android-builder-1  | 	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
+android-builder-1  | 	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
+android-builder-1  | 	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
+android-builder-1  | 	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+android-builder-1  | 	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+android-builder-1  | 	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+android-builder-1  | 	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+android-builder-1  | 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+android-builder-1  | 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:65)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:36)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:107)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:56)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:61)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
+android-builder-1  | 	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+android-builder-1  | 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
+android-builder-1  | 	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
+android-builder-1  | 	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:75)
+android-builder-1  | 	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:41)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:289)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
+android-builder-1  | 	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+android-builder-1  | 	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+android-builder-1  | 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+android-builder-1  | 	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+android-builder-1  | 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:48)
+android-builder-1  | 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)
+android-builder-1  | 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:64)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:127)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+android-builder-1  | 	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+android-builder-1  | 	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+android-builder-1  | 	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+android-builder-1  | 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+android-builder-1  | 37 actionable tasks: 37 executed
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+android-builder-1  | 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+android-builder-1  | 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+android-builder-1  | 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+android-builder-1  | 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+android-builder-1  | 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+android-builder-1  | 
+android-builder-1  | 
+android-builder-1  | BUILD FAILED in 2m 10s
+[Kandroid-builder-1 exited with code 1
+ Compose Stopping Aborting on container exit...
+ Container docker-android-builder-1 Stopping 
+ Container docker-android-builder-1 Stopped 
+
