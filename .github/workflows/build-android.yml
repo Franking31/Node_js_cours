@@ -2,6 +2,8 @@ name: Build Android APK
 
 on:
   push:
+    tags:
+      - 'v*'
     branches:
       - main
       - develop
@@ -106,9 +108,12 @@ jobs:
       - name: Compilation APK Debug
         working-directory: generated/source/android
         run: |
+          VERSION_CODE=${{github.run_number}}
+          VERSION_NAME="1.0.${{ github.run_number }}"
           ./gradlew assembleDebug \
+            -PversionCode=$VERSION_CODE \
+            -PversionName=$VERSION_NAME \
             --no-daemon \
-            -Dorg.gradle.jvmargs="-Xmx3g"
 
       # ─────────────────────────────────────────
       # 11. Upload APK comme artifact
